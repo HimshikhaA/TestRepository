@@ -1,0 +1,28 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="FAST_PageHeaderComponent">
+
+    <aura:attribute name="showIcon" type="Boolean" default="true"/>
+    <aura:attribute name="iconName" type="String" default="custom:custom9"/>
+    <aura:attribute name="iconSize" type="String" default="medium"/>
+    <aura:attribute name="pageTitle" type="String" default="{!$Label.c.FAST_LightningWelcomeTitle}"/>
+    <aura:attribute name="pageSubTitle" type="String" default="Fast, adaptable, scalable, transferable Lightning component development framework"/>
+
+    <div class="slds-page-header" style="">
+        <div class="slds-media">
+            <aura:if isTrue="{!v.showIcon}">
+                <div class="slds-media__figure">
+                    <lightning:icon iconName="{!v.iconName}" size="{!v.iconSize}" alternativeText="{!v.pageTitle}"/>
+                </div>
+            </aura:if>
+
+            <div class="slds-media__body">
+                <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="{!v.pageTitle}"><ui:outputRichText value="{!v.pageTitle}"/></h1>
+                <p class="slds-text-body_small slds-line-height_reset">{!v.pageSubTitle}</p>
+            </div>
+        </div>
+    </div>
+
+</aura:component>

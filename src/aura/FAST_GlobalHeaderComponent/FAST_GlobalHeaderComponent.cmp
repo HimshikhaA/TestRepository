@@ -1,0 +1,37 @@
+<!--
+ - Created by cedrickithima on 21/09/2017.
+ -->
+
+<aura:component description="FAST_GlobalHeaderComponent">
+
+    <lightning:layout class="slds-global-header slds-page-header fast-header">
+        <lightning:layoutItem size="2" flexibility="no-grow" padding="around-small">
+            <strong><em>FAST</em></strong>Lightning
+        </lightning:layoutItem>
+
+        <lightning:layoutItem flexibility="grow" class="slds-p-right--small slds-global-header__item slds-global-header__item_search">
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left-right">
+                <lightning:icon iconName="utility:search" size="x-small" alternativeText="Search" class="slds-input__icon slds-input__icon_left"/>
+                <input type="text" autocomplete="off" class="slds-input slds-lookup__search-input" id="global-search-01" placeholder="Search Salesforce" role="textbox" value=""/>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="no-grow" class="slds-p-right--small slds-global-header__item ">
+            <lightning:buttonIcon iconName="utility:add" variant="bare" alternativeText="More" iconClass="dark" size="medium" class="slds-global-header__button_icon"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="no-grow" class="slds-p-right--small">
+            <lightning:buttonIcon iconName="utility:help" variant="bare" alternativeText="Help" iconClass="dark" size="medium" class="slds-global-header__button_icon"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="no-grow" class="slds-p-right--small">
+            <lightning:buttonIcon iconName="utility:setup" variant="bare" alternativeText="Setup" iconClass="dark" size="medium" class="slds-global-header__button_icon"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="no-grow" class="slds-p-right--small">
+            <lightning:buttonIcon iconName="utility:notification" variant="bare" alternativeText="Notification" iconClass="dark" size="medium" class="slds-global-header__button_icon"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem flexibility="no-grow" class="slds-p-right--small">
+            <lightning:buttonIcon iconName="utility:user" variant="bare" alternativeText="User" iconClass="dark" size="medium" class="slds-global-header__button_icon"/>
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+
+</aura:component>

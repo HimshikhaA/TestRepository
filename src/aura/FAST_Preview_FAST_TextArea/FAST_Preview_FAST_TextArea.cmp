@@ -1,0 +1,80 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_TextArea">
+
+    <!-- Attributes -->
+    <aura:attribute name="inputLabel" type="String" default="Text area input preview"/>
+    <aura:attribute name="inputName" type="String" default="richTextArea"/>
+    <aura:attribute name="inputValue" type="String" default="Initial value for the multi line text area input"/>
+    <aura:attribute name="inputMaxLength" type="Integer" default="3000"/>
+    <aura:attribute name="placeholder" type="String" default="Text area placeholder"/>
+    <aura:attribute name="inputDisabled" type="Boolean" default="false"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <lightning:textarea name="{!v.inputLabel}" value="{!v.inputValue}"
+                                label="{!v.inputLabel}" maxlength="{!v.inputMaxLength}"  placeholder="{!v.placeholder}" disabled="{!v.inputDisabled}"/>
+
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="6">
+
+            <ul>
+                <li>Element: <strong>{!v.inputName}</strong></li>
+                <li>Value: <ui:outputTextArea value="{!v.inputValue}"/>
+                </li>
+            </ul>
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputName"
+                                        inputLabel="inputName"
+                                        inputValue="{!v.inputName}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputLabel"
+                                        inputLabel="inputLabel"
+                                        inputValue="{!v.inputLabel}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputMaxLength"
+                                        inputLabel="inputMaxLength"
+                                        inputValue="{!v.inputMaxLength}"
+                                        inputType="number"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.placeholder"
+                                        inputLabel="placeholder"
+                                        inputValue="{!v.placeholder}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputDisabled"
+                                        inputLabel="inputDisabled"
+                                        inputValue="{!v.inputDisabled}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

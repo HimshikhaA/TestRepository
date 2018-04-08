@@ -1,0 +1,20 @@
+{
+    "projectName": "HimshikhaAgrawalTest",
+    "username": "himshikhaagrawaltest@gmail.com",
+    "id": "bf3fb610-3b56-11e8-bbcd-cfe1db32c712",
+    "namespace": "",
+    "orgType": "developer",
+    "loginUrl": "https://login.salesforce.com/",
+    "instanceUrl": "https://himshikha4-dev-ed.my.salesforce.com",
+    "workspace": "/Users/appirio-13530/Documents",
+    "subscription": [
+        "ApexClass",
+        "ApexComponent",
+        "ApexPage",
+        "ApexTrigger",
+        "AuraDefinitionBundle",
+        "Flow",
+        "StaticResource",
+        "Workflow"
+    ]
+}

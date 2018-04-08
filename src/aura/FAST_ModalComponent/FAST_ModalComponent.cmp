@@ -1,0 +1,154 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="FAST_ModalComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="showModal" type="Boolean" default="true"/>
+    <aura:attribute name="name" type="String" default="modalPreview"/>
+    <aura:attribute name="title" type="String" default="Preview Modal Section"/>
+    <aura:attribute name="contentType" type="String" default="form"/>
+    <aura:attribute name="dynamicContent" type="String" default="c:FAST_ArticleComponent"/>
+    <aura:attribute name="dynamicContentParameters" type="String[]" default=""/>
+    <aura:attribute name="dynamicContentParametersSrc" type="String" default=""/>
+
+    <aura:attribute name="formParameterType" type="String" default="staticResource"/>
+    <aura:attribute name="formParameters" type="String[]" default=""/>
+    <aura:attribute name="formName" type="String" default="modalPreview"/>
+    <aura:attribute name="formClass" type="String" default="slds-form slds-form_stacked"/>
+    <aura:attribute name="formParametersSrc" type="String" default="/FASTDefaultJSON/singleForm-Component-params.json"/>
+    <aura:attribute name="formValues" type="Map" default=""/>
+    <aura:attribute name="formTitleClass" type="String" default="slds-text-heading_medium slds-hyphenate"/>
+    <aura:attribute name="headerClass" type="String" default="slds-modal__header"/>
+    <aura:attribute name="footerClass" type="String" default="slds-modal__footer"/>
+
+    <aura:attribute name="formInstructions" type="String" default="Please fill in the form below"/>
+    <aura:attribute name="formInstructionsClass" type="String" default=""/>
+    <aura:attribute name="showFormHeader" type="Boolean" default="true"/>
+    <aura:attribute name="showFormFooter" type="Boolean" default="true"/>
+
+    <aura:attribute name="formEmbedType" type="String" default=""/>
+    <aura:attribute name="saveBtnValue" type="String" default=""/>
+
+    <aura:attribute name="textContent" type="String" default=""/>
+    <aura:attribute name="textContainerClass" type="String" default=""/>
+
+    <!-- Btn Configuration -->
+    <!-- Cancel -->
+    <aura:attribute name="cancelBtnName" type="String" default="CancelBtn"/>
+    <aura:attribute name="cancelBtnLabel" type="String" default="Cancel"/>
+    <aura:attribute name="cancelBtnClass" type="String" default=""/>
+    <aura:attribute name="cancelBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="cancelBtnOnClickAction" type="String" default="CancelBtnClicked"/>
+    <aura:attribute name="cancelBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save And New -->
+    <aura:attribute name="saveAndNewBtnName" type="String" default="saveAndNewBtn"/>
+    <aura:attribute name="saveAndNewBtnLabel" type="String" default="Save &amp; New"/>
+    <aura:attribute name="saveAndNewBtnClass" type="String" default=""/>
+    <aura:attribute name="saveAndNewBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="saveAndNewBtnOnClickAction" type="String" default="saveAndNewBtnClicked"/>
+    <aura:attribute name="saveAndNewBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save -->
+    <aura:attribute name="saveBtnName" type="String" default="saveBtnBtn"/>
+    <aura:attribute name="saveBtnLabel" type="String" default="Save"/>
+    <aura:attribute name="saveBtnClass" type="String" default=""/>
+    <aura:attribute name="saveBtnVariant" type="String" default="brand"/>
+    <aura:attribute name="saveBtnOnClickAction" type="String" default="saveBtnClicked"/>
+    <aura:attribute name="saveBtnDisabled" type="Boolean" default="false"/>
+
+    <aura:attribute name="showFormInstructions" type="Boolean" default="false"/>
+    <aura:attribute name="showSaveButton" type="Boolean" default="true"/>
+    <aura:attribute name="showCancelBtn" type="Boolean" default="true"/>
+    <aura:attribute name="showSaveAndNewBtn" type="Boolean" default="true"/>
+
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="fastFormEvent" type="c:FAST_InputEvent"/>
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}" />
+    <aura:handler name="change" value="{!v.formValues}" action="{!c.fireInputEvent}" />
+
+
+    <aura:if isTrue="{!v.showModal}">
+       <div id="FASTModal" class="demo-only">
+           <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+               <div class="slds-modal__container">
+                   <header class="slds-modal__header">
+                       <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick="{!c.closeModal}">
+                           <lightning:icon iconName="utility:close" size="medium" />
+                           <span class="slds-assistive-text">Close</span>
+                       </button>
+                       <h2 class="slds-text-heading_medium slds-hyphenate">{!v.title}</h2>
+                   </header>
+                   <div class="slds-modal__content slds-p-around_medium">
+
+                       <aura:if isTrue="{!v.contentType == 'form'}">
+                          <c:FAST_SingleFormComponent formName="{!v.formName}"
+                                                      formParametersSrc="{!v.formParametersSrc}"
+                                                      formParameters="{!v.formParameters}"
+                                                      formEmbedType="{!v.formEmbedType}"
+                                                      formParameterType="{!v.formParameterType}"
+                                                      formTitle="{!v.title}"
+                                                      formTitleClass="{!v.formTitleClass}"
+                                                      formSection="{!v.formName}"
+                                                      showFormInstructions="{!v.showFormInstructions}"
+                                                      formInstructions="{!v.formInstructions}"
+                                                      formInstructionsClass="{!v.formInstructionsClass}"
+                                                      showFormHeader="false"
+                                                      showFormFooter="false"
+                                                      showSaveButton="false"
+                                                      showCancelBtn="false"
+                                                      showSaveAndNewBtn="false"
+                          />
+                       </aura:if>
+                       <aura:if isTrue="{!v.contentType == 'dynamicContent'}">
+                          <c:FAST_DynamicContentComponent dynamicContent="{!v.dynamicContent}"
+                                                          dynamicContentParameters="{!v.dynamicContentParameters}"
+                          />
+                       </aura:if>
+                       <aura:if isTrue="{!v.contentType == 'text'}">
+                           <c:FAST_TextComponent containerClass="{!v.textContainerClass}"
+                                                 textContent="{!v.textContent}"
+                           />
+                       </aura:if>
+                   </div>
+                   <aura:if isTrue="{!v.showFormFooter}">
+                       <footer class="{!v.footerClass}">
+                           <aura:if isTrue="{!v.showCancelBtn}">
+                               <c:FAST_ButtonComponent btnName="{!v.cancelBtnName}"
+                                                       btnLabel="{!v.cancelBtnLabel}"
+                                                       btnTitle="{!v.cancelBtnLabel}"
+                                                       btnVariant="{!v.cancelBtnVariant}"
+                                                       btnOnclickAction="{!v.cancelBtnOnClickAction}"
+                                                       btnDisabled="{!v.cancelBtnDisabled}"
+                               />
+                           </aura:if>
+                           <aura:if isTrue="{!v.showSaveAndNewBtn}">
+                               <c:FAST_ButtonComponent btnName="{!v.saveAndNewBtnName}"
+                                                       btnLabel="{!v.saveAndNewBtnLabel}"
+                                                       btnTitle="{!v.saveAndNewBtnLabel}"
+                                                       btnVariant="{!v.saveAndNewBtnVariant}"
+                                                       btnOnclickAction="{!v.saveAndNewBtnOnClickAction}"
+                                                       btnDisabled="{!v.saveAndNewBtnDisabled}"
+                               />
+                           </aura:if>
+                           <aura:if isTrue="{!v.showSaveButton}">
+                               <c:FAST_ButtonComponent btnName="{!v.saveBtnName}"
+                                                       btnValue="{!v.saveBtnValue}"
+                                                       btnLabel="{!v.saveBtnLabel}"
+                                                       btnTitle="{!v.saveBtnLabel}"
+                                                       btnVariant="{!v.saveBtnVariant}"
+                                                       btnOnclickAction="{!v.saveBtnOnClickAction}"
+                                                       btnDisabled="{!v.saveBtnDisabled}"
+                               />
+                           </aura:if>
+                       </footer>
+                   </aura:if>
+               </div>
+           </section>
+           <div class="slds-backdrop slds-backdrop_open"></div>
+       </div>
+    </aura:if>
+</aura:component>

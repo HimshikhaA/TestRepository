@@ -1,0 +1,84 @@
+<!--
+ - Created by cedricsolvo on 28/09/2017.
+ -->
+
+<aura:component description="temp_UIComponentPage">
+
+    <!-- Attributes -->
+    <aura:attribute name="pageView" type="String" default="buttonsUIPage"/>
+    <aura:attribute name="menuSelectedItem" type="String" default="buttonsUIPage"/>
+    <aura:attribute name="submenuSelectedItem" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="menuItemClicked" event="c:FAST_ClickEvent" action="{!c.menuItemClicked}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <!-- Page Sub header-->
+        <lightning:layoutItem size="12">
+            <c:FAST_PageHeaderComponent iconName="utility:layout"
+                    pageTitle="UI Components"
+                    pageSubTitle="Standard user interface elements"
+            />
+        </lightning:layoutItem>
+        <!-- / sub header -->
+
+        <!-- Horizontal Nav -->
+        <lightning:layoutItem size="12">
+            <c:FAST_MenuComponent menuValues="/FASTDefaultJSON/ui-components-menu-json.json"
+                    mainMenuClass="slds-grid"
+                    menuLocation="uiComponentPage"
+                    containerClass="slds-context-bar"
+                    navClass="slds-context-bar__secondary"
+            />
+        </lightning:layoutItem>
+        <!-- / Horizontal Nav  -->
+
+        <!-- Section cards -->
+        <lightning:layoutItem size="12" class="slds-p-top--medium slds-p-around--large">
+
+            <aura:if isTrue="{!v.pageView == 'buttonsUIPage'}">
+                <c:temp_FAST_ButtonsPage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'menusUIPage'}">
+                <c:temp_FAST_MenusPage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'imagesUIPage'}">
+                <c:temp_FAST_ImagesPage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'textUIPage'}">
+                <c:temp_FAST_TextPage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'cardUIPage'}">
+                <c:temp_FAST_CardPage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'articleUIPage'}">
+                <c:temp_FAST_ArticlePage />
+            </aura:if>
+            <aura:if isTrue="{!v.pageView == 'pageHeaderPage'}">
+                <c:temp_FAST_PageHeaderPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'pageTitlePage'}">
+                <c:temp_FAST_PageTitlePage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'tabsPage'}">
+                <c:temp_FAST_TabsPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'accordionPage'}">
+                <c:temp_FAST_AccordionPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'modalPage'}">
+                <c:temp_FAST_ModalPage />
+            </aura:if>
+
+        </lightning:layoutItem>
+        <!-- / Section cards -->
+
+
+    </lightning:layout>
+</aura:component>

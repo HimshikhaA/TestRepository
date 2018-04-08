@@ -1,0 +1,37 @@
+<aura:component controller="InlineFieldApexController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="GLOBAL">
+	<!--Attributes to pass -->
+    <aura:attribute name="objectName" type="String" required="true" default="" />
+    <aura:attribute name="fieldAPI" type="String" required="true" default="" />
+    <aura:attribute name="editRequired" type="Boolean" default="false" />
+    <aura:attribute name="fieldValueTemp" type="String" default="" />
+
+    <div id="displaySection" class="slds-form"> 
+        <div class="slds-grid">
+            <div class="slds-grow slds-form-element_separator" styleClass="width:94%;"> 
+                <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="{!v.objectName}">
+                    <lightning:outputField fieldName="{!v.fieldAPI}"/>
+                </lightning:recordViewForm>
+            </div>
+            <div class="slds-form-element " styleClass="width:6%;">
+                <aura:if isTrue="{!v.editRequired}">
+                    <lightning:buttonIcon iconName="utility:edit" variant="bare" onclick="{!c.enableEdit}" alternativeText="Edit Name" class="buttonStyle"/>
+                </aura:if>
+            </div>
+        </div>
+    </div>
+    
+    <div id="editSection" class="slds-form slds-form_compound" style="display:none;">
+        <div class="slds-form-element__row">
+            <div class="slds-form-element slds-size_1-of-2">
+                <lightning:recordEditForm aura:id="recordViewForm" 
+                                          recordId="{!v.recordId}" recordTypeId="012R00000000000000" objectApiName="{!v.objectName}">
+                    <lightning:inputField fieldName="{!v.fieldAPI}" aura:id="updatedValue"/>
+                </lightning:recordEditForm>
+            </div>
+            <div class="slds-form-element slds-size_1-of-2 editButton">
+                <lightning:buttonIcon iconName="utility:close" variant="bare" onclick="{!c.disableEdit}" alternativeText="Cancel" class="slds-icon_container slds-icon_container_circle slds-button--icon-border"/>
+                <lightning:buttonIcon iconName="utility:check" variant="bare" onclick="{!c.updateRecord}" alternativeText="Save" class="slds-icon_container slds-icon_container_circle slds-button--icon-border"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

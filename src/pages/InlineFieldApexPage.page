@@ -1,0 +1,22 @@
+<apex:page standardController="Account" extensions="AccountInlineFieldApexController" showHeader="false" standardStylesheets="false" sidebar="false" showQuickActionVfHeader="false">
+    <body id="check" style="margin:0;">
+        <apex:includeLightning /> 
+        <apex:form rendered="{!IF(isTeamMember,True,False)}">
+            <script>
+                $Lightning.use("c:InlineFieldApp", function() {
+                    $Lightning.createComponent(
+                        "c:InlineField",
+                        {
+                            recordId:"{!accRecord.Id}",
+                            objectName:"Account",
+                            fieldAPI:"DunsNumber",
+                            editRequired:"TRUE"
+                        },
+                        "lightning" 
+                    );
+                });
+            </script>
+            <div id="lightning" />
+        </apex:form>
+    </body>
+</apex:page>

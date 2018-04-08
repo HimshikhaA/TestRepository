@@ -1,0 +1,10 @@
+/**
+ * Created by cedrickithima on 24/11/2017.
+ */
+.THIS {
+}
+
+.THIS html, .THIS body {
+     height: 100% !important;
+     width: 100% !important;
+ }

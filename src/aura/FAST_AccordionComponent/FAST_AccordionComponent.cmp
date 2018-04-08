@@ -1,0 +1,77 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="FAST_AccordionComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="parametersSrc" type="String" default="/FASTDefaultJSON/accordion-preview.json"/>
+    <aura:attribute name="tabParameters" type="String[]" default=""/>
+    <aura:attribute name="tabContainerClass" type="String" default=""/>
+    <aura:attribute name="tabListClass" type="String" default="slds-accordion"/>
+
+
+    <!-- Tab Configuration -->
+    <aura:attribute name="activeTabId" type="String" default=""/>
+    <aura:attribute name="allTabs" type="String[]" default=""/>
+    <aura:attribute name="allOtherTabs" type="String[]" default=""/>
+
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.parametersSrc}" action="{!c.doInit}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem class="" size="12">
+
+            <div class="{!v.tabContainerClass}">
+                <ul class="{!v.tabListClass}" role="tablist" >
+                    <aura:iteration items="{!v.tabParameters}" var="item">
+                        <li aura:id="{!item.sectionView}" class="{!item.sectionNavBarClass}" title="{!item.sectionTitle}" role="presentation" >
+                            <div class="slds-accordion__summary slds-p-top--x-small">
+                                <h3 class="slds-text-heading_small slds-accordion__summary-heading">
+                                    <button class="slds-button slds-button_reset slds-accordion__summary-action" id="{!item.sectionView}" onclick="{!c.handleTabClickEvent}">
+                                        <span id="{!item.sectionView + 'DwnIcon'}" class="slds-p-right--small slds-hide">
+                                            <lightning:icon iconName="utility:chevrondown" size="x-small" />
+                                        </span>
+                                        <span id="{!item.sectionView + 'SideIcon'}">
+                                            <lightning:icon iconName="utility:chevronright" size="x-small" class="slds-p-right--small" />
+                                        </span>
+                                        <span class="slds-truncate" title="Accordion summary">{!item.sectionTitle}</span>
+                                    </button>
+                                </h3>
+                            </div>
+
+                            <section aura:id="{!item.sectionView + 'Tab'}" class="{!item.sectionTabClass}" id="{!item.sectionView + 'Tab'}">
+                                <div class="slds-accordion__content">
+                                    <aura:if isTrue="{!item.contentType == 'form'}">
+                                        <c:FAST_SingleFormComponent formName="{!item.sectionView}"
+                                                                    formParametersSrc="{!item.formParametersSrc}"
+                                                                    formTitleClass="{!v.formTitleClass}"
+                                                                    formSection="{!item.sectionView}"
+                                                                    formInstructions="{!v.formInstructions}"
+                                                                    formInstructionsClass="{!v.formInstructionsClass}"
+                                                                    showFormHeader="false"
+                                                                    showFormFooter="false"
+                                                                    showSaveButton="false"
+                                                                    showCancelBtn="false"
+                                                                    showSaveAndNewBtn="false"
+                                        />
+                                    </aura:if>
+
+                                </div>
+                            </section>
+
+                        </li>
+
+                    </aura:iteration>
+                </ul>
+
+            </div>
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+
+
+</aura:component>

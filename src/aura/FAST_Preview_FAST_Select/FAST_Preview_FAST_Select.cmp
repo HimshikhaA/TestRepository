@@ -1,0 +1,100 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Select">
+
+    <!-- Attributes -->
+    <aura:attribute name="selectName" type="String" default="selectPreviewInput"/>
+    <aura:attribute name="selectPlaceholder" type="String" default="Select an option"/>
+    <aura:attribute name="selectLabel" type="String" default="selectPreviewInput"/>
+    <aura:attribute name="selectClass" type="String" default=""/>
+    <aura:attribute name="selectValue" type="String" default=""/>
+    <aura:attribute name="displayStrings" type="String" default="{!v.selectOptions}"/>
+    <aura:attribute name="selectDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="showInputEvent" type="Boolean" default="false"/>
+
+    <aura:attribute name="selectOptions" type="List" default="[
+    {'label': 'Text', 'value': 'text'},
+    {'label': 'Checkbox', 'value':'checkbox'},
+    {'label': 'Date', 'value': 'date'},
+    {'label': 'Email', 'value': 'email'},
+    {'label': 'Number', 'value': 'number'}
+    ]"/>
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="6" >
+            <lightning:select name="{!v.selectName}" label="{!v.selectLabel}" value="{!v.selectValue}" disabled="{!v.selectDisabled}">
+                <option value=""> {!v.selectPlaceholder} </option>
+                <aura:iteration items="{!v.selectOptions}" var="option">
+                    <option value="{!option.value}" text="{!option.label}"></option>
+                </aura:iteration>
+            </lightning:select>
+
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="6">
+
+            <ul>
+                <li>Element: <strong>{!v.selectName}</strong></li>
+                <li>Value: <strong>{!v.selectValue}</strong></li>
+            </ul>
+
+        </lightning:layoutItem>
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.selectName"
+                                           inputLabel="selectName"
+                                           inputValue="{!v.selectName}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.selectLabel"
+                                           inputLabel="selectLabel"
+                                           inputValue="{!v.selectLabel}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.selectPlaceholder"
+                                           inputLabel="selectPlaceholder"
+                                           inputValue="{!v.selectPlaceholder}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <h2 class="slds-m-bottom--medium">Select options in JSON</h2>
+                <ul>
+                    <aura:iteration items="{!v.selectOptions}" var="item">
+                        <li>
+                            <lightning:layout >
+                                <lightning:layoutItem size="6" class="slds-p-right--small slds-text-align--right">  {!item.value}:</lightning:layoutItem>
+                                <lightning:layoutItem size="6" > <strong>{!item.label}</strong></lightning:layoutItem>
+                            </lightning:layout>
+                        </li>
+                    </aura:iteration>
+                </ul>
+                <c:FAST_TextComponent containerClass="jsonString"
+                                       textContent="{!v.displayStrings}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.selectDisabled"
+                                        inputLabel="selectDisabled"
+                                        inputValue="{!v.selectDisabled}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+    </div>
+</aura:component>

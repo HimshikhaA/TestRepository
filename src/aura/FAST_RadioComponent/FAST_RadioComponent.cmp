@@ -1,0 +1,39 @@
+<!--
+ - Created by cedrickithima on 15/01/2018.
+ -->
+
+<aura:component description="FAST_RadioComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="inputName" type="String" default="FAST_Input_button"/>
+    <aura:attribute name="inputLabel" type="String" default="Radio Input"/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="inputClass" type="String" default=""/>
+    <aura:attribute name="inputType" type="String" default="text"/>
+    <aura:attribute name="inputValue" type="String" default=""/>
+    <aura:attribute name="initialValue" type="String" default=""/>
+    <aura:attribute name="placeholder" type="String" default=""/>
+    <aura:attribute name="inputDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="inputRequired" type="Boolean" default="false"/>
+    <aura:attribute name="maxChars" type="Integer" default=""/>
+
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Yes', 'value': 'YES'},
+    {'label': 'No', 'value': 'NO'}
+    ]"/>
+    <!-- Events -->
+    <aura:registerEvent name="fastInputEvent" type="c:FAST_InputEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.inputValue}" action="{!c.handleInputEvent}" />
+    <aura:handler name="change" value="{!v.inputDisabled}" action="{!c.handleDisableChange}" />
+    <aura:handler name="change" value="{!v.inputRequired}" action="{!c.handleRequiredChange}" />
+
+    <lightning:radioGroup aura:id="{!v.inputName}"
+            name="{!v.inputName}"
+            label="{!v.inputLabel}"
+            options="{! v.options }"
+            value="{! v.inputValue }"
+            onchange="{!c.handleInputEvent }"
+    />
+
+</aura:component>

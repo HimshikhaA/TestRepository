@@ -1,0 +1,95 @@
+<!--
+ - Created by cedrickithima on 10/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Input">
+
+    <!-- Attributes -->
+    <aura:attribute name="inputName" type="String" default="previewInput"/>
+    <aura:attribute name="inputLabel" type="String" default="Standard Input"/>
+    <aura:attribute name="inputClass" type="String" default=""/>
+    <aura:attribute name="inputType" type="String" default="text"/>
+    <aura:attribute name="inputValue" type="String" default=""/>
+    <aura:attribute name="placeholder" type="String" default=""/>
+    <aura:attribute name="inputDisabled" type="Boolean" default="false"/>
+
+    <aura:attribute name="inputTypeOptions" type="List" default="[
+    {'label': 'Text', 'value': 'text'},
+    {'label': 'Checkbox', 'value': 'checkbox'},
+    {'label': 'Date', 'value': 'date'},
+    {'label': 'Date time', 'value': 'datetime-local'},
+    {'label': 'Email', 'value': 'email'},
+    {'label': 'Number', 'value': 'number'},
+    {'label': 'Password', 'value': 'password'},
+    {'label': 'Tel', 'value': 'tel'},
+    {'label': 'Time', 'value': 'time'},
+    {'label': 'Toggle', 'value': 'toggle'},
+    {'label': 'Search', 'value': 'search'},
+    {'label': 'URL', 'value': 'url'}
+    ]"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <lightning:input type="{!v.inputType}" label="{!v.inputLabel}" name="{!v.inputName}" value="{!v.inputValue}" disabled="{!v.inputDisabled}" placeholder="{!v.placeholder}" checked="{!v.inputValue}"/>
+
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="6">
+
+            <ul>
+                <li>Element: <strong>{!v.inputName}</strong></li>
+                <li>Value: <strong>{!v.inputValue}</strong></li>
+            </ul>
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputName"
+                                        inputLabel="inputName"
+                                        inputValue="{!v.inputName}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputLabel"
+                                        inputLabel="inputLabel"
+                                        inputValue="{!v.inputLabel}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.inputType"
+                        selectLabel="inputType"
+                        options="{!v.inputTypeOptions}"
+                        selectValue="{!v.inputType}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.placeholder"
+                                        inputLabel="placeholder"
+                                        inputValue="{!v.placeholder}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.inputDisabled"
+                                        inputLabel="inputDisabled"
+                                        inputValue="{!v.inputDisabled}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

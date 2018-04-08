@@ -1,0 +1,45 @@
+<!--
+ - Created by cedrickithima on 10/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Text">
+
+    <!-- Attributes -->
+    <aura:attribute name="containerClass" type="String" default=""/>
+    <aura:attribute name="textContent" type="String" default="Sample text content from a custom label or plain text."/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_TextComponent containerClass="{!v.containerClass}"
+                                    textContent="{!v.textContent}"
+            />
+        </lightning:layoutItem>
+
+
+
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.textContent"
+                                          inputLabel="textContent"
+                                          inputValue="{!v.textContent}"
+                />
+            </lightning:layoutItem>
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.containerClass"
+                                       inputLabel="containerClass"
+                                       inputValue="{!v.containerClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

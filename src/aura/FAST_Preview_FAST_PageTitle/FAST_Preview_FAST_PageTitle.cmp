@@ -1,0 +1,58 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_PageTitle">
+
+    <!-- Attributes -->
+    <aura:attribute name="pageTitle" type="String" default="The big brown fox header"/>
+    <aura:attribute name="pageTitleClass" type="String" default="slds-text-heading_large"/>
+    <aura:attribute name="pageSubTitle" type="String" default="A nicely formatted sub header to complement it"/>
+    <aura:attribute name="pageSubTitleClass" type="String" default="slds-text-body_regular slds-m-bottom--medium"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_PageTitleComponent pageTitle="{!v.pageTitle}"
+                    pageSubTitle="{!v.pageSubTitle}"
+                    pageTitleClass="{!v.pageTitleClass}"
+                    pageSubTitleClass="{!v.pageSubTitleClass}"
+            />
+        </lightning:layoutItem>
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageTitle"
+                                           inputLabel="pageTitle"
+                                           inputValue="{!v.pageTitle}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageTitleClass"
+                                           inputLabel="pageTitleClass"
+                                           inputValue="{!v.pageTitleClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageSubTitle"
+                                           inputLabel="pageSubTitle"
+                                           inputValue="{!v.pageSubTitle}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageSubTitleClass"
+                                           inputLabel="pageSubTitleClass"
+                                           inputValue="{!v.pageSubTitleClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

@@ -1,0 +1,167 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Button">
+
+    <!-- Attributes -->
+    <aura:attribute name="btnName" type="String" default="standardBtn"/>
+    <aura:attribute name="btnLabel" type="String" default="Standard Button"/>
+    <aura:attribute name="btnTitle" type="String" default="Standard Button"/>
+    <aura:attribute name="btnClass" type="String" default=""/>
+    <aura:attribute name="btnType" type="String" default=""/>
+    <aura:attribute name="btnValue" type="String" default="FAST Test"/>
+    <aura:attribute name="btnVariant" type="String" default="brand"/>
+    <aura:attribute name="btnIconPosition" type="String" default=""/>
+    <aura:attribute name="btnLDSIcon" type="String" default="utility:inbox"/>
+    <aura:attribute name="btnOnclickAction" type="String" default="standardBtnFx"/>
+    <aura:attribute name="btnTabindex" type="Integer" default=""/>
+    <aura:attribute name="btnDisabled" type="Boolean" default="false"/>
+
+    <aura:attribute name="iconPositionOptions" type="List" default="[
+    {'label': 'Left', 'value': 'left'},
+    {'label': 'Right', 'value': 'right'}
+    ]"/>
+
+    <aura:attribute name="btnVariantOptions" type="List" default="[
+    {'label': 'Base', 'value': 'base'},
+    {'label': 'Neutral', 'value': 'neutral'},
+    {'label': 'Brand', 'value': 'brand'},
+     {'label': 'Destructive', 'value': 'destructive'},
+     {'label': 'Inverse', 'value': 'inverse'}
+    ]"/>
+
+    <aura:attribute name="btnTypOptions" type="List" default="[
+    {'label': 'Button', 'value': 'button'},
+    {'label': 'Reset', 'value': 'reset'},
+    {'label': 'Submit', 'value': 'submit'}
+    ]"/>
+    <!-- Btn Attributes Configuration-->
+    <aura:attribute name="showBtnEvent" type="Boolean" default="false"/>
+    <aura:attribute name="btnNameClicked" type="String" default=""/>
+    <aura:attribute name="btnValueClicked" type="String" default=""/>
+    <aura:attribute name="btnOnClickActionClicked" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastBtnClicked" event="c:FAST_ClickEvent" action="{!c.handleBtnClick}"/>
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="6" >
+            <c:FAST_ButtonComponent btnName="{!v.btnName}"
+                                    btnLabel="{!v.btnLabel}"
+                                    btnTitle="{!v.btnTitle}"
+                                    btnClass="{!v.btnClass}"
+                                    btnType="{!v.btnType}"
+                                    btnValue="{!v.btnValue}"
+                                    btnVariant="{!v.btnVariant}"
+                                    btnIconPosition="{!v.btnIconPosition}"
+                                    btnIconName="{!v.btnLDSIcon}"
+                                    btnOnclickAction="{!v.btnOnclickAction}"
+                                    btnTabindex="{!v.btnTabindex}"
+                                    btnDisabled="{!v.btnDisabled}"
+            />
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="6">
+            <aura:if isTrue="{!v.showBtnEvent}">
+                <ul>
+                    <li>Element: <strong>{!v.btnNameClicked}</strong></li>
+                    <li>Value: <strong>{!v.btnValueClicked}</strong></li>
+                    <li>Action: <strong>{!v.btnOnClickActionClicked}</strong></li>
+                </ul>
+            </aura:if>
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="6">
+            <c:FAST_InputComponent inputName="v.btnName"
+                                   inputLabel="btnName"
+                                   inputValue="{!v.btnName}"
+            />
+        </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.btnLabel"
+                                       inputLabel="btnLabel"
+                                       inputValue="{!v.btnLabel}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.btnTitle"
+                                        inputLabel="btnTitle"
+                                        inputValue="{!v.btnTitle}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.btnClass"
+                                        inputLabel="btnClass"
+                                        inputValue="{!v.btnClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.btnType"
+                        selectLabel="btnType"
+                        options="{!v.btnTypOptions}"
+                        selectValue="{!v.btnType}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <lightning:input label="btnValue" name="btnValue" value="{!v.btnValue}" />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.btnVariant"
+                        selectLabel="btnVariant"
+                        options="{!v.btnVariantOptions}"
+                        selectValue="{!v.btnVariant}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.btnIconPosition"
+                        selectLabel="btnIconPosition"
+                        options="{!v.iconPositionOptions}"
+                        selectValue="{!v.btnIconPosition}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6" >
+                <c:FAST_InputComponent inputName="v.btnLDSIcon"
+                                        inputLabel="btnIconName"
+                                        inputValue="{!v.btnLDSIcon}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" >
+                <c:FAST_InputComponent inputName="v.btnOnclickAction"
+                                        inputLabel="btnOnclickAction"
+                                        inputValue="{!v.btnOnclickAction}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.btnTabindex"
+                                        inputLabel="btnTabindex"
+                                        inputValue="{!v.btnTabindex}"
+                                        inputType="number"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.btnDisabled"
+                                        inputLabel="btnDisabled"
+                                        inputValue="{!v.btnDisabled}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

@@ -1,0 +1,194 @@
+<!--
+ - Created by cedrickithima on 11/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Card">
+
+    <!-- Attributes -->
+    <aura:attribute name="showIcon" type="Boolean" default="true"/>
+    <aura:attribute name="iconName" type="String" default="custom:custom9"/>
+    <aura:attribute name="iconSize" type="String" default="large"/>
+    <aura:attribute name="cardTitle" type="String" default="A preview card"/>
+    <aura:attribute name="cardText" type="String" default="This preview can be shown to display all types of content including text, articles, or other components."/>
+    <aura:attribute name="cardClass" type="String" default=""/>
+    <aura:attribute name="textContainerClass" type="String" default=""/>
+    <aura:attribute name="articleTitle" type="String" default="An article with an image"/>
+    <aura:attribute name="articleContent" type="String" default="This article can be inserted using code, or custom labels, it takes rich text and can contain images."/>
+    <aura:attribute name="articleContainerClass" type="String" default=""/>
+    <aura:attribute name="articleShowImage" type="Boolean" default="true"/>
+    <aura:attribute name="articleImgSrc" type="String" default="/resource/1506133703000/FAST_Images/FAST-image.jpg"/>
+    <aura:attribute name="articleImgClass" type="String" default="homePage"/>
+    <aura:attribute name="articleImgPosition" type="String" default="top"/>
+    <aura:attribute name="contentType" type="String" default="text"/>
+    <aura:attribute name="dynamicContent" type="String" default="c:FAST_ButtonComponent"/>
+    <aura:attribute name="dynamicContentParameters" type="String" default="/FASTDefaultJSON/default-FAST-button-component-json.json"/>
+
+    <aura:attribute name="contentTypeOptions" type="List" default="[
+    {'label': 'Text', 'value': 'text'},
+    {'label': 'Article', 'value': 'article'},
+    {'label': 'Dynamic Content', 'value': 'dynamicContent'}
+    ]"/>
+
+    <aura:attribute name="articlePositionOptions" type="List" default="[
+    {'label': 'Top', 'value': 'top'},
+    {'label': 'Left', 'value': 'left'},
+    {'label': 'Right Content', 'value': 'right'},
+    {'label': 'Bottom Content', 'value': 'bottom'}
+    ]"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_CardComponent cardClass="{!v.cardClass}"
+                                  showIcon="{!v.showIcon}"
+                                  iconName="{!v.iconName}"
+                                  iconSize="{!v.iconSize}"
+                                  cardTitle="{!v.cardTitle}"
+                                  cardText="{!v.cardText}"
+                                  textContainerClass="{!v.textContainerClass}"
+                                  articleTitle="{!v.articleTitle}"
+                                  articleContent="{!v.articleContent}"
+                                  articleShowImage="{!v.articleShowImage}"
+                                  articleImgSrc="{!v.articleImgSrc}"
+                                  articleImgClass="{!v.articleImgClass}"
+                                  articleImgPosition="{!v.articleImgPosition}"
+                                  contentType="{!v.contentType}"
+                                  dynamicContent="{!v.dynamicContent}"
+                                  dynamicContentParameters="{!v.dynamicContentParameters}"
+            />
+        </lightning:layoutItem>
+
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.showIcon"
+                                        inputLabel="showIcon"
+                                        inputValue="{!v.showIcon}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.iconName"
+                                        inputLabel="iconName"
+                                        inputValue="{!v.iconName}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.contentType"
+                        selectLabel="contentType"
+                        options="{!v.contentTypeOptions}"
+                        selectValue="{!v.contentType}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.cardClass"
+                                        inputLabel="cardClass"
+                                        inputValue="{!v.cardClass}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.iconSize"
+                                        inputLabel="iconSize"
+                                        inputValue="{!v.iconSize}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.cardTitle"
+                                        inputLabel="cardTitle"
+                                        inputValue="{!v.cardTitle}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <aura:if isTrue="{!v.contentType == 'text'}">
+            <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.cardText"
+                                        inputLabel="cardText"
+                                        inputValue="{!v.cardText}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.textContainerClass"
+                                        inputLabel="textContainerClass"
+                                        inputValue="{!v.textContainerClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        </aura:if>
+        <aura:if isTrue="{!v.contentType == 'article'}">
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.articleTitle"
+                                            inputLabel="articleTitle"
+                                            inputValue="{!v.articleTitle}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_RichTextComponent inputName="v.articleContent"
+                                            placeholder="v.placeholder"
+                                            inputValue="{!v.articleContent}"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6" >
+                    <c:FAST_InputComponent inputName="v.articleContainerClass"
+                                            inputLabel="articleContainerClass"
+                                            inputValue="{!v.articleContainerClass}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" >
+                    <c:FAST_InputComponent inputName="v.articleShowImage"
+                                            inputLabel="articleShowImage"
+                                            inputValue="{!v.articleShowImage}"
+                                            inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.articleImgSrc"
+                                            inputLabel="articleImgSrc"
+                                            inputValue="{!v.articleImgSrc}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_SelectComponent selectName="v.articleImgPosition"
+                            selectLabel="articleImgPosition"
+                            options="{!v.articlePositionOptions}"
+                            selectValue="{!v.articleImgPosition}"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+
+        <aura:if isTrue="{!v.contentType == 'dynamicContent'}">
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.dynamicContent"
+                                            inputLabel="dynamicContent"
+                                            inputValue="{!v.dynamicContent}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.dynamicContentParameters"
+                                            inputLabel="dynamicContentParameters"
+                                            inputValue="{!v.dynamicContentParameters}"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+    </div>
+</aura:component>

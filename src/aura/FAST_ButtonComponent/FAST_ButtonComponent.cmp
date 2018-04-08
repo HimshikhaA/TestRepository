@@ -1,0 +1,32 @@
+<!--
+ - Created by cedrickithima on 19/09/2017.
+ @Description: A component to display a button
+ -->
+
+<aura:component description="FAST_ButtonComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="btnName" type="String" default=""/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="btnLabel" type="String" default="Standard Button"/>
+    <aura:attribute name="btnTitle" type="String" default=""/>
+    <aura:attribute name="btnClass" type="String" default=""/>
+    <aura:attribute name="btnType" type="String" default=""/>
+    <aura:attribute name="btnValue" type="String" default="saveForm"/>
+    <aura:attribute name="btnVariant" type="String" default=""/>
+    <aura:attribute name="btnIconPosition" type="String" default=""/>
+    <aura:attribute name="btnIconName" type="String" default=""/>
+    <aura:attribute name="btnOnclickAction" type="String" default="saveBtn"/>
+    <aura:attribute name="btnTabindex" type="Integer" default=""/>
+    <aura:attribute name="btnDisabled" type="Boolean" default="false"/>
+
+    <!-- Events -->
+    <aura:registerEvent name="fastBtnClicked" type="c:FAST_ClickEvent"/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.customLabelID}" action="{!c.doInit}"/>
+
+    <lightning:button variant="{!v.btnVariant}" label="{!v.btnLabel}" iconName="{!v.btnIconName}" iconPosition="{!v.btnIconPosition}" onclick="{! c.handleOnClick }" disabled="{!v.btnDisabled}" class="{!v.btnClass}"/>
+
+</aura:component>

@@ -1,0 +1,15 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="FAST_PageTitleComponent">
+
+    <aura:attribute name="pageTitle" type="String" default=""/>
+    <aura:attribute name="pageTitleClass" type="String" default="slds-text-heading_large"/>
+    <aura:attribute name="pageSubTitle" type="String" default=""/>
+    <aura:attribute name="pageSubTitleClass" type="String" default="slds-text-body_regular slds-m-bottom--medium"/>
+
+    <div class="{!v.pageTitleClass}">{!v.pageTitle}</div>
+    <div class="{!v.pageSubTitleClass}">{!v.pageSubTitle}</div>
+
+</aura:component>

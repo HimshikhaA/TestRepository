@@ -1,0 +1,23 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="temp_FAST_TabsPage">
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_PageTitleComponent pageTitle="Tabs"
+                                       pageSubTitle="Dynamically generated tabs with dynamic content"
+            />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_CardComponent cardTitle="{!$Label.c.FAST_PreviewConfigurationLabel}"
+                                  contentType="dynamicContent"
+                                  dynamicContent="c:FAST_Preview_FAST_Tab"
+            />
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+</aura:component>

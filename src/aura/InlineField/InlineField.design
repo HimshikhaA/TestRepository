@@ -1,0 +1,11 @@
+<design:component >
+	<design:attribute name="objectName"
+                      label="Object Name"
+                      description="sObject Name"/>
+    <design:attribute name="fieldAPI"
+                      label="Fields API"
+                      description="Fields to be displayed"/>
+    <design:attribute name="editRequired" 
+                      label="Editable?"
+                      description="Is field Editable or not"/>
+</design:component>

@@ -1,0 +1,13 @@
+<!--
+ - Created by cedrickithima on 24/01/2018.
+ -->
+
+<aura:component description="FAST_MessageComponent">
+    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_info" role="alert">
+        <h2>Logged in as John Smith (johnsmith@acme.com). <a href="javascript:void(0);">Log out</a></h2>
+        <button class="slds-button slds-button_icon slds-notify__close slds-button_icon-inverse" title="Close" onclick="{!c.closeModal}">
+            <lightning:icon iconName="utility:close" size="small" class="slds-button__icon" />
+            <span class="slds-assistive-text">Close</span>
+        </button>
+    </div>
+</aura:component>

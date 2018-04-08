@@ -1,0 +1,22 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="temp_FAST_ButtonsPage">
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_PageTitleComponent pageTitle="{!$Label.c.buttons_title}"
+                    pageSubTitle="{!$Label.c.buttons_tagline}"
+            />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_CardComponent cardTitle="{!$Label.c.FAST_PreviewConfigurationLabel}"
+                    contentType="dynamicContent"
+                    dynamicContent="c:FAST_Preview_FAST_Button"
+            />
+        </lightning:layoutItem>
+
+    </lightning:layout>
+</aura:component>

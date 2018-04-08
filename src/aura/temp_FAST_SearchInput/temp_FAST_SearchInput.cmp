@@ -1,0 +1,42 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="temp_FAST_SearchInput">
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_PageTitleComponent pageTitle="{!$Label.c.searchInput_title}"
+                    pageSubTitle="{!$Label.c.searchInput_tag}"
+            />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_CardComponent cardTitle="{!$Label.c.FAST_PreviewConfigurationLabel}"
+                    contentType="dynamicContent"
+                    dynamicContent="c:FAST_Preview_FAST_Search_Input"
+            />
+
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small" size="12" >
+
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem size="6" class="slds-m-bottom--small" padding="around-small">
+
+                    <c:FAST_CardComponent contentType="text"
+                            cardTitle="{!$Label.c.usageInstructions_label}"
+                            cardText="{!$Label.c.FAST_Buttons_Instructions}"
+                    />
+
+                </lightning:layoutItem>
+                <lightning:layoutItem size="6" class="slds-m-bottom--small" padding="around-small">
+                    <c:FAST_CardComponent contentType="text"
+                            cardTitle="{!$Label.c.FAST_Code_Label}"
+                            cardText="{!$Label.c.FAST_ButtonAvailableParams}"
+                    />
+                </lightning:layoutItem>
+
+            </lightning:layout>
+        </lightning:layoutItem>
+
+    </lightning:layout>
+</aura:component>

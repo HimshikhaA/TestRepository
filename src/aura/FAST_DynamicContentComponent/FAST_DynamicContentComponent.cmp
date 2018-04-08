@@ -1,0 +1,18 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="FAST_DynamicContentComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="dynamicContent" type="String" default="c:FAST_ButtonComponent"/>
+    <aura:attribute name="dynamicContentParamsLocation" type="String" default="/FASTDefaultJSON/default-FAST-button-component-json.json"/>
+    <aura:attribute name="dynamicContentParameters" type="String[]" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <!-- Dynamic Content -->
+    {!v.body}
+
+</aura:component>

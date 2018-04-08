@@ -1,0 +1,22 @@
+<!--
+ - Created by Cedric Solvo on 19/09/2017.
+ @Description: A component to display images
+ -->
+
+<aura:component description="FAST_PictureComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="imgSrc" type="String" default=""/>
+    <aura:attribute name="imgClass" type="String" default="homePage"/>
+    <aura:attribute name="staticResource" type="String" default=""/>
+    <aura:attribute name="pathToFile" type="String" default="homePage"/>
+    <aura:attribute name="altText" type="String" default=""/>
+    <aura:attribute name="altTextCustomLabelID" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.pathToFile}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.staticResource}" action="{!c.doInit}"/>
+
+    <img src="{!v.imgSrc}" class="{!v.imgClass}" alt="{!v.altText}" />
+</aura:component>

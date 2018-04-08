@@ -1,0 +1,50 @@
+<!--
+ - Created by cedrickithima on 10/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Image">
+
+    <!-- Attributes -->
+    <aura:attribute name="imgSrc" type="String" default="/resource/1506133703000/FAST_Images/FAST-image.jpg"/>
+    <aura:attribute name="imgClass" type="String" default="homePage"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="6" >
+            <c:FAST_PictureComponent imgSrc="{!v.imgSrc}"
+                    imgClass="{!v.imgClass}"
+            />
+        </lightning:layoutItem>
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="12">
+                <h4>Src options</h4>
+                <ul>
+                    <li>{!$Resource.FAST_Images + '/FAST-image.jpg'}</li>
+                    <li>{!$Resource.FAST_Images + '/adatable.jpg'}</li>
+                    <li>{!$Resource.FAST_Images + '/scalable-image.jpg'}</li>
+                    <li>{!$Resource.FAST_Images + '/transferable-image.jpg'}</li>
+                </ul>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.imgSrc"
+                                        inputLabel="imgSrc"
+                                        inputValue="{!v.imgSrc}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.imgClass"
+                                        inputLabel="imgClass"
+                                        inputValue="{!v.imgClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

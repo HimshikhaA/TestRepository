@@ -1,0 +1,49 @@
+<!--
+ - Created by Cedric Solvo on 19/09/2017.
+ @Description: A component to display menu items
+ -->
+
+<aura:component description="FAST_MenuComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="menuValues" type="String" default="/FASTDefaultJSON/main-menu-json.json"/>
+    <aura:attribute name="menuValuesType" type="String" default="staticResource"/>
+    <aura:attribute name="menuItems" type="String[]" default=""/>
+    <aura:attribute name="containerClass" type="String" default=""/>
+    <aura:attribute name="navClass" type="String" default=""/>
+    <aura:attribute name="mainMenuClass" type="String" default="fast-nav-menu"/>
+    <aura:attribute name="menuLocation" type="String" default="mainMenu"/>
+    <aura:attribute name="currentSelectedItem" type="String" default=""/>
+    <aura:attribute name="previousSelectedItem" type="String" default="homePage"/>
+    <aura:attribute name="showIcons" type="Boolean" default="false"/>
+
+    <!-- Events -->
+    <aura:registerEvent name="menuItemClicked" type="c:FAST_ClickEvent"/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.menuValues}" action="{!c.doInit}"/>
+    <aura:handler name="menuItemClicked" event="c:FAST_ClickEvent" action="{!c.handleMenuItemClicked}"/>
+
+    <div class="{!v.containerClass}">
+        <nav class="{!v.navClass}" role="navigation">
+            <ul class="{!v.mainMenuClass}">
+                <aura:iteration items="{!v.menuItems}" var="item">
+                    <li aura:id="{!item.aura_id}" id="{!item.elementId}" class="{!item.class}" title="{!item.title}" onclick="{!c.menuItemClicked}">
+                        <aura:if isTrue="{!item.showIcon}">
+                            <span class="menuItem">
+                                <span class="menuIcon"> <lightning:icon iconName="{!item.iconName}" size="{!item.iconSize}" alternativeText="{!item.alternativeText}"/></span> <span class="menuText"> {!item.menuLabel}</span>
+                            </span>
+                            <aura:set attribute="else">
+                                <span class="menuText"> {!item.menuLabel}</span>
+                            </aura:set>
+                        </aura:if>
+                    </li>
+                </aura:iteration>
+            </ul>
+        </nav>
+    </div>
+
+
+
+</aura:component>

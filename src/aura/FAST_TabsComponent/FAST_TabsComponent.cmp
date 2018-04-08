@@ -1,0 +1,74 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="FAST_TabsComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="parametersSrc" type="String" default="/FASTDefaultJSON/tabs-preview.json"/>
+    <aura:attribute name="tabParameters" type="String[]" default=""/>
+    <aura:attribute name="tabContainerClass" type="String" default="slds-tabs_default"/>
+    <aura:attribute name="tabListClass" type="String" default="slds-tabs_default__nav"/>
+
+
+    <!-- Tab Configuration -->
+    <aura:attribute name="activeTabId" type="String" default=""/>
+    <aura:attribute name="allTabs" type="String[]" default=""/>
+    <aura:attribute name="allOtherTabs" type="String[]" default=""/>
+
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.parametersSrc}" action="{!c.doInit}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem class="" size="12">
+
+            <div class="{!v.tabContainerClass}">
+                <ul class="{!v.tabListClass}" role="tablist" >
+                    <aura:iteration items="{!v.tabParameters}" var="item">
+                        <li aura:id="{!item.sectionView}" class="{!item.sectionNavBarClass}" title="{!item.sectionTitle}" role="presentation" onclick="{!c.handleTabClickEvent}"  id="{!item.sectionView}" ><a class="slds-vertical-tabs__link"  role="tab" tabindex="0" aria-selected="true" aria-controls="{!item.sectionView}">{!item.sectionTitle}</a></li>
+                    </aura:iteration>
+                </ul>
+                <aura:iteration items="{!v.tabParameters}" var="item">
+                    <div aura:id="{!item.sectionView + 'Tab'}" class="{!item.sectionTabClass}" id="{!item.sectionView + 'Tab'}" role="tabpanel" aria-labelledby="{!item.sectionView}">
+                        <div class="slds-text-longform">
+                            <h3 class="slds-text-heading_medium">{!item.sectionTitle}</h3>
+
+                            <aura:if isTrue="{!item.contentType == 'form'}">
+                                <c:FAST_SingleFormComponent formName="{!item.sectionView}"
+                                                            formParametersSrc="{!item.formParametersSrc}"
+                                                            formTitleClass="{!item.formTitleClass}"
+                                                            formSection="{!item.sectionView}"
+                                                            formInstructions="{!item.formInstructions}"
+                                                            formInstructionsClass="{!item.formInstructionsClass}"
+                                                            showFormHeader="false"
+                                                            showFormFooter="false"
+                                                            showSaveButton="false"
+                                                            showCancelBtn="false"
+                                                            showSaveAndNewBtn="false"
+                                />
+                            </aura:if>
+
+                            <aura:if isTrue="{!item.contentType == 'article'}">
+                                <c:FAST_ArticleComponent title="{!item.title}"
+                                                         titleClass="{!item.titleClass}"
+                                                         content="{!item.content}"
+                                                         containerClass="{!item.containerClass}"
+                                                         imgPosition="{!item.imgPosition}"
+                                                         imgSrc="{!item.imgSrc}"
+                                                         imgClass="{!item.imgClass}"
+                                                         showImage="{!item.showImage}"
+                                />
+                            </aura:if>
+
+                        </div>
+                    </div>
+                </aura:iteration>
+            </div>
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+
+</aura:component>

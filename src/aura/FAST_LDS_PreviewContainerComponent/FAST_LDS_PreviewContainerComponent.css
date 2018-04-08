@@ -1,0 +1,102 @@
+/**
+ * Created by cedrickithima on 22/09/2017.
+ */
+.THIS{
+    max-width: 1770px;
+    margin: auto;
+    height: 100%;
+    min-height: 1024px;
+}
+.THIS .home-page-cover{
+    min-height: 400px;
+    background: url(/resource/FAST_Home_Background) no-repeat top center fixed;
+    background-color: #061939;
+   /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+}
+
+.THIS .fastMenuContainer{
+    background: #f7f9fb;
+    border-left: 1px solid rgb(216, 221, 230);
+    border-right: 1px solid rgb(216, 221, 230);
+}
+
+.THIS .slds-page-header{
+    border-right: 1px solid rgb(216, 221, 230);
+}
+
+.THIS .preview-config-container {
+    background: rgb(250, 250, 249);
+    border-top: 1px solid rgb(216, 221, 230);
+    margin: 30px -15px -12px;
+    padding: 20px 60px;
+}
+
+/* Navigation*/
+.THIS .fast-nav-menu{
+    min-width: 200px;
+}
+.THIS .fast-menu_item, .THIS .menuText {
+    padding-left: 10px;
+}
+
+.THIS .fast-menu_item:hover, .THIS .fast-menu_item.active{
+    background: rgb(84, 105, 141);
+    color: #fff;
+    cursor: pointer;
+}
+
+.THIS .slds-context-bar__item.active{
+    outline: 0;
+    border-radius: 0;
+    background-color: rgb(247, 249, 251);
+    border-bottom: 3px solid rgb(0, 161, 223);
+    margin-bottom: -3px;
+    text-decoration: none;
+    cursor: text;
+}
+
+.THIS .fast-menu_item:hover .slds-icon-text-default,.THIS .fast-menu_item.active .slds-icon-text-default  {
+    fill: #fff;
+}
+
+.THIS span.menuItem {
+    display: inline-block;
+    padding: 10px 0;
+}
+
+.THIS .slds-context-bar__item span.menuText {
+    flex-grow: 1;
+    padding: 0 .75rem;
+    border-radius: 0;
+    min-width: 0%;
+    color: inherit;
+    font-size: .8125rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-top: 10px;
+}
+
+.THIS .slds-context-bar{
+    background: #f7f9fb;
+    border-top: none;
+    border-bottom: 1px solid rgb(216, 221, 230);
+}
+
+.THIS .slds-text-heading_large {
+    font-weight: 800;
+}
+
+.THIS .slds-text-body_regular.slds-m-bottom--medium {
+    font-size: 1.5em;
+}
+
+.THIS img.homePage {
+    max-width: 478px;
+    height: auto;
+    min-width: 255px;
+}

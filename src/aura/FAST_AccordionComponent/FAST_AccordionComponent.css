@@ -1,0 +1,12 @@
+/**
+ * Created by cedrickithima on 10/11/2017.
+ */
+
+.THIS .slds-accordion__section {
+    padding: 0.25rem;
+}
+
+.THIS .slds-button.slds-accordion__summary-action:focus {
+    outline: 0;
+    box-shadow: none;
+}

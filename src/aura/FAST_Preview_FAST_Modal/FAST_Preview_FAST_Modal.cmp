@@ -1,0 +1,397 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Modal">
+
+    <!-- Attributes -->
+    <aura:attribute name="forParamOptions" type="List" default="[
+    {'label': 'Modal Form sample', 'value': '/FASTDefaultJSON/singleForm-Component-params.json'},
+    {'label': 'Modal Form sample2', 'value': '/FASTDefaultJSON/multiStepForm-Component-params-page2.json'}
+    ]"/>
+    <aura:attribute name="contentTypeOptions" type="List" default="[
+    {'label': 'Form', 'value': 'form'},
+    {'label': 'Dynamic Content', 'value': 'dynamicContent'}
+    ]"/>
+    <aura:attribute name="showModal" type="Boolean" default="true"/>
+    <aura:attribute name="multiStepFormValues" type="Map" default=""/>
+    <aura:attribute name="contentType" type="String" default="form"/>
+    <aura:attribute name="formValues" type="Map" default=""/>
+    <aura:attribute name="displayFormValues" type="String" default=""/>
+    <aura:attribute name="formName" type="String" default="modalFormPreview"/>
+    <aura:attribute name="formParametersSrc" type="String" default="/FASTDefaultJSON/singleForm-Component-params.json"/>
+    <aura:attribute name="formParameters" type="String[]" default=""/>
+    <aura:attribute name="formClass" type="String" default=""/>
+    <aura:attribute name="formTitleClass" type="String" default="slds-text-heading_medium slds-hyphenate"/>
+    <aura:attribute name="headerClass" type="String" default="slds-modal__header"/>
+    <aura:attribute name="footerClass" type="String" default="slds-modal__footer"/>
+    <aura:attribute name="formInstructions" type="String" default=""/>
+    <aura:attribute name="formInstructionsClass" type="String" default=""/>
+    <aura:attribute name="showFormHeader" type="Boolean" default="true"/>
+    <aura:attribute name="showFormFooter" type="Boolean" default="true"/>
+
+    <aura:attribute name="dynamicContent" type="String" default="c:FAST_ArticleComponent"/>
+    <aura:attribute name="dynamicContentParametersSrc" type="String" default=""/>
+
+    <!-- Btn Configuration -->
+    <aura:attribute name="btnVariantOptions" type="List" default="[
+    {'label': 'Base', 'value': 'base'},
+    {'label': 'Neutral', 'value': 'neutral'},
+    {'label': 'Brand', 'value': 'brand'},
+     {'label': 'Destructive', 'value': 'destructive'},
+     {'label': 'Inverse', 'value': 'inverse'}
+    ]"/>
+    <!-- Cancel -->
+    <aura:attribute name="cancelBtnName" type="String" default="CancelBtn"/>
+    <aura:attribute name="cancelBtnLabel" type="String" default="Cancel"/>
+    <aura:attribute name="cancelBtnClass" type="String" default=""/>
+    <aura:attribute name="cancelBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="cancelBtnOnClickAction" type="String" default="CancelBtnClicked"/>
+    <aura:attribute name="cancelBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save And New -->
+    <aura:attribute name="saveAndNewBtnName" type="String" default="saveAndNewBtn"/>
+    <aura:attribute name="saveAndNewBtnLabel" type="String" default="Save &amp; New"/>
+    <aura:attribute name="saveAndNewBtnClass" type="String" default=""/>
+    <aura:attribute name="saveAndNewBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="saveAndNewBtnOnClickAction" type="String" default="saveAndNewBtnClicked"/>
+    <aura:attribute name="saveAndNewBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save -->
+    <aura:attribute name="saveBtnName" type="String" default="saveBtnBtn"/>
+    <aura:attribute name="saveBtnLabel" type="String" default="Save"/>
+    <aura:attribute name="saveBtnClass" type="String" default=""/>
+    <aura:attribute name="saveBtnVariant" type="String" default="brand"/>
+    <aura:attribute name="saveBtnOnClickAction" type="String" default="saveBtnClicked"/>
+    <aura:attribute name="saveBtnDisabled" type="Boolean" default="false"/>
+
+
+    <aura:attribute name="showSaveButton" type="Boolean" default="true"/>
+    <aura:attribute name="showCancelBtn" type="Boolean" default="true"/>
+    <aura:attribute name="showSaveAndNewBtn" type="Boolean" default="true"/>
+
+    <!-- Btn Attributes Configuration-->
+    <aura:attribute name="showBtnEvent" type="Boolean" default="false"/>
+    <aura:attribute name="btnNameClicked" type="String" default=""/>
+    <aura:attribute name="btnValueClicked" type="String" default=""/>
+    <aura:attribute name="btnOnClickActionClicked" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastBtnClicked" event="c:FAST_ClickEvent" action="{!c.handleBtnClick}"/>
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+    <aura:handler name="fastFormEvent" event="c:FAST_InputEvent" action="{!c.handleFormEvent}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_ModalComponent showModal="{!v.showModal}"
+                    contentType="{!v.contentType}"
+                    dynamicContent="{!v.dynamicContent}"
+                    dynamicContentParametersSrc="{!v.dynamicContentParametersSrc}"
+                    formName="{!v.formName}"
+                    formParametersSrc="{!v.formParametersSrc}"
+                    formClass="{!v.formClass}"
+                    formTitleClass="{!v.formTitleClass}"
+                    formInstructions="{!v.formInstructions}"
+                    formInstructionsClass="{!v.formInstructionsClass}"
+                    headerClass="{!v.headerClass}"
+                    footerClass="{!v.footerClass}"
+                    cancelBtnName="{!v.cancelBtnName}"
+                    cancelBtnLabel="{!v.cancelBtnLabel}"
+                    cancelBtnClass="{!v.cancelBtnClass}"
+                    cancelBtnVariant="{!v.cancelBtnVariant}"
+                    cancelBtnOnClickAction="{!v.cancelBtnOnClickAction}"
+                    cancelBtnDisabled="{!v.cancelBtnDisabled}"
+                    saveAndNewBtnName="{!v.saveAndNewBtnName}"
+                    saveAndNewBtnLabel="{!v.saveAndNewBtnLabel}"
+                    saveAndNewBtnClass="{!v.saveAndNewBtnClass}"
+                    saveAndNewBtnVariant="{!v.saveAndNewBtnVariant}"
+                    saveAndNewBtnOnClickAction="{!v.saveAndNewBtnOnClickAction}"
+                    saveAndNewBtnDisabled="{!v.saveAndNewBtnDisabled}"
+                    saveBtnName="{!v.saveBtnName}"
+                    saveBtnLabel="{!v.saveBtnLabel}"
+                    saveBtnClass="{!v.saveBtnClass}"
+                    saveBtnVariant="{!v.saveBtnVariant}"
+                    saveBtnOnClickAction="{!v.saveBtnOnClickAction}"
+                    saveBtnDisabled="{!v.saveBtnDisabled}"
+                    showFormHeader="{!v.showFormHeader}"
+                    showFormFooter="{!v.showFormFooter}"
+                    showSaveButton="{!v.showSaveButton}"
+                    showCancelBtn="{!v.showCancelBtn}"
+                    showSaveAndNewBtn="{!v.showSaveAndNewBtn}"
+            />
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+
+    <lightning:layoutItem padding="around-small" size="6">
+        <h2 class="slds-m-bottom--medium">Form Values</h2>
+        <c:FAST_TextComponent textContent="{!v.displayFormValues}" />
+
+    </lightning:layoutItem>
+    <aura:if isTrue="{!v.showBtnEvent}">
+        <lightning:layoutItem padding="around-small" size="6">
+            <h2 class="slds-m-bottom--medium">Button Events </h2>
+            <ul>
+                <li><lightning:layout >
+                    <lightning:layoutItem size="6" class="slds-p-right--small slds-text-align--right">  Element:</lightning:layoutItem>
+                    <lightning:layoutItem size="6" > <strong>{!v.btnNameClicked}</strong></lightning:layoutItem>
+                </lightning:layout></li>
+                <li><lightning:layout >
+                    <lightning:layoutItem size="6" class="slds-p-right--small slds-text-align--right">  Action:</lightning:layoutItem>
+                    <lightning:layoutItem size="6" > <strong>{!v.btnOnClickActionClicked}</strong></lightning:layoutItem>
+                </lightning:layout></li>
+            </ul>
+        </lightning:layoutItem>
+    </aura:if>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <h1>Toggle Modal</h1>
+                <c:FAST_InputComponent inputName="v.showModal"
+                                       inputLabel="showModal"
+                                       inputValue="{!v.showModal}"
+                                       inputType="checkbox"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.contentType"
+                                        selectLabel="contentType"
+                                        options="{!v.contentTypeOptions}"
+                                        selectValue="{!v.contentType}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+
+
+        <aura:if isTrue="{!v.contentType == 'dynamicContent'}">
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.dynamicContent"
+                                           inputLabel="dynamicContent"
+                                           inputValue="{!v.dynamicContent}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.dynamicContentParametersSrc"
+                                              inputLabel="dynamicContentParametersSrc"
+                                              inputValue="{!v.dynamicContentParametersSrc}"
+                    />
+                </lightning:layoutItem>
+
+            </lightning:layout>
+
+        </aura:if>
+        <aura:if isTrue="{!v.contentType == 'form'}">
+            <lightning:layout class="slds-m-top--xx-large" >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.formClass"
+                                              inputLabel="formClass"
+                                              inputValue="{!v.formClass}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_SelectComponent selectName="v.formParametersSrc"
+                                            selectLabel="formParametersSrc"
+                                            options="{!v.forParamOptions}"
+                                            selectValue="{!v.formParametersSrc}"
+                    />
+                </lightning:layoutItem>
+
+            </lightning:layout>
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.formName"
+                                           inputLabel="formName"
+                                           inputValue="{!v.formName}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.formNameClass"
+                                              inputLabel="formNameClass"
+                                              inputValue="{!v.formNameClass}"
+                    />
+                </lightning:layoutItem>
+
+            </lightning:layout>
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.formInstructions"
+                                              inputLabel="formInstructions"
+                                              inputValue="{!v.formInstructions}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.formInstructionsClass"
+                                              inputLabel="formInstructionsClass"
+                                              inputValue="{!v.formInstructionsClass}"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+            <lightning:layout >
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.showFormHeader"
+                                           inputLabel="showFormHeader"
+                                           inputValue="{!v.showFormHeader}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.showFormFooter"
+                                           inputLabel="showFormFooter"
+                                           inputValue="{!v.showFormFooter}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.showSaveButton"
+                                           inputLabel="showSaveButton"
+                                           inputValue="{!v.showSaveButton}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveBtnName"
+                                           inputLabel="saveBtnName"
+                                           inputValue="{!v.saveBtnName}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveBtnLabel"
+                                           inputLabel="saveBtnLabel"
+                                           inputValue="{!v.saveBtnLabel}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.saveBtnClass"
+                                              inputLabel="saveBtnClass"
+                                              inputValue="{!v.saveBtnClass}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_SelectComponent selectName="v.saveBtnVariant"
+                                            selectLabel="saveBtnVariant"
+                                            options="{!v.btnVariantOptions}"
+                                            selectValue="{!v.saveBtnVariant}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveBtnOnClickAction"
+                                           inputLabel="saveBtnOnClickAction"
+                                           inputValue="{!v.saveBtnOnClickAction}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveBtnDisabled"
+                                           inputLabel="saveBtnDisabled"
+                                           inputValue="{!v.saveBtnDisabled}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.showCancelBtn"
+                                           inputLabel="showCancelBtn"
+                                           inputValue="{!v.showCancelBtn}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.cancelBtnName"
+                                           inputLabel="cancelBtnName"
+                                           inputValue="{!v.cancelBtnName}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.cancelBtnLabel"
+                                           inputLabel="cancelBtnLabel"
+                                           inputValue="{!v.cancelBtnLabel}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.cancelBtnClass"
+                                              inputLabel="cancelBtnClass"
+                                              inputValue="{!v.cancelBtnClass}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_SelectComponent selectName="v.cancelBtnVariant"
+                                            selectLabel="cancelBtnVariant"
+                                            options="{!v.btnVariantOptions}"
+                                            selectValue="{!v.cancelBtnVariant}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.cancelBtnOnClickAction"
+                                           inputLabel="cancelBtnOnClickAction"
+                                           inputValue="{!v.cancelBtnOnClickAction}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.cancelBtnDisabled"
+                                           inputLabel="cancelBtnDisabled"
+                                           inputValue="{!v.cancelBtnDisabled}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout multipleRows="true">
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.showSaveAndNewBtn"
+                                           inputLabel="showSaveAndNewBtn"
+                                           inputValue="{!v.showSaveAndNewBtn}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveAndNewBtnName"
+                                           inputLabel="saveAndNewBtnName"
+                                           inputValue="{!v.saveAndNewBtnName}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveAndNewBtnLabel"
+                                           inputLabel="saveAndNewBtnLabel"
+                                           inputValue="{!v.saveAndNewBtnLabel}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_TextAreaComponent inputName="v.saveAndNewBtnClass"
+                                              inputLabel="saveAndNewBtnClass"
+                                              inputValue="{!v.saveAndNewBtnClass}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_SelectComponent selectName="v.saveAndNewBtnVariant"
+                                            selectLabel="saveAndNewBtnVariant"
+                                            options="{!v.btnVariantOptions}"
+                                            selectValue="{!v.saveAndNewBtnVariant}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveAndNewBtnOnClickAction"
+                                           inputLabel="saveAndNewBtnOnClickAction"
+                                           inputValue="{!v.saveAndNewBtnOnClickAction}"
+                    />
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small" size="6">
+                    <c:FAST_InputComponent inputName="v.saveAndNewBtnDisabled"
+                                           inputLabel="saveAndNewBtnDisabled"
+                                           inputValue="{!v.saveAndNewBtnDisabled}"
+                                           inputType="checkbox"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+        </aura:if>
+    </div>
+</aura:component>

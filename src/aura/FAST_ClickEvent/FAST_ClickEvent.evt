@@ -1,0 +1,14 @@
+<!--
+ - Created by cedrickithima on 19/09/2017.
+ @Description: An event to capture a component click
+ -->
+
+<aura:event type="COMPONENT" description="FAST_ClickEvent">
+    <aura:attribute name="itemId" type="String" default=""/>
+    <aura:attribute name="itemRecordId" type="String" default=""/>
+    <aura:attribute name="itemName" type="String" default=""/>
+    <aura:attribute name="itemValue" type="String" default=""/>
+    <aura:attribute name="itemOnclickAction" type="String" default=""/>
+    <aura:attribute name="menuItem" type="String" default=""/>
+    <aura:attribute name="menuLocation" type="String" default=""/>
+</aura:event>

@@ -1,0 +1,28 @@
+<!--
+ - Created by cedrickithima on 25/01/2018.
+ -->
+
+<aura:component description="FAST_FieldValuesComponent">
+
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="label" type="String" default=""/>
+    <aura:attribute name="value" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem size="12">
+            <div class="slds-form-element" padding="around-small">
+                <label class="slds-form-element__label" for="input-unique-id">{!v.label} </label>
+                <div class="slds-form-element__control">
+                    <ui:outputRichText class="slds-text-longform" value="{!v.value}"/>
+                </div>
+            </div>
+        </lightning:layoutItem>
+
+
+    </lightning:layout>
+
+</aura:component>

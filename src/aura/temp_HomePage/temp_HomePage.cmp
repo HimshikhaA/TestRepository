@@ -1,0 +1,149 @@
+<!--
+ - Created by cedricsolvo on 28/09/2017.
+ -->
+
+<aura:component description="temp_HomePage">
+
+
+    <!-- Events -->
+    <aura:registerEvent name="menuItemClicked" type="c:FAST_ClickEvent"/>
+
+    <lightning:layout multipleRows="true">
+
+        <!-- Top picture -->
+        <lightning:layoutItem size="12" class="home-page-cover">
+
+        </lightning:layoutItem>
+        <!-- / sub header -->
+
+        <!-- Page Sub header-->
+        <lightning:layoutItem size="12">
+            <c:FAST_PageHeaderComponent />
+        </lightning:layoutItem>
+        <!-- / sub header -->
+
+        <!-- Top cards -->
+        <lightning:layoutItem size="12" class="slds-p-top--medium slds-p-around--large">
+            <lightning:layout horizontalAlign="spread">
+                <lightning:layoutItem padding="around-small" >
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning:icon iconName="utility:layout" size="large" alternativeText="UI Components"/>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2>
+                                        <span class="slds-text-heading_small"> UI Components</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">Re-usable layouts, buttons, icons, and other UI/ UX components.</div>
+                    </article>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small">
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning:icon iconName="utility:edit" size="large" alternativeText="Inputs"/>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2>
+                                        <span class="slds-text-heading_small"> Inputs</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">Lightning design system, aura, and HTML5 inputs.</div>
+                    </article>
+                </lightning:layoutItem>
+                <lightning:layoutItem padding="around-small">
+                    <article class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                                <div class="slds-media__figure">
+                                    <lightning:icon iconName="utility:edit_form" size="large" alternativeText="Forms"/>
+                                </div>
+                                <div class="slds-media__body">
+                                    <h2>
+                                        <span class="slds-text-heading_small"> Forms</span>
+                                    </h2>
+                                </div>
+                            </header>
+                        </div>
+                        <div class="slds-card__body slds-card__body_inner">A variety of vertical, horizontal, and multi-stage form components.</div>
+                    </article>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </lightning:layoutItem>
+        <!-- / Top cards -->
+
+        <!-- Page Content-->
+        <lightning:layoutItem padding="around-small" size="12" class="slds-p-around--large">
+            <c:FAST_ArticleComponent title="What is FAST Lightning?"
+                                     content="The lightning component framework is a set of base components that allow the rapid development of more complex components. Each component is controlled using JSON strings and aura attributes. This drastically reduces the amount of code you need to write when creating your own components."
+                                     containerClass="slds-text-body_regular"
+                                     showImage="false"
+                                     imgSrc=""
+                                     imgClass=""
+                                     imgPosition=""
+            />
+
+            <lightning:layout class="slds-p-top--medium">
+                <lightning:layoutItem class="">
+                    <c:FAST_ArticleComponent title="Fast"
+                                             content="Embedding standards based components into your own will reduce the time spent coding. All UI elements are transparently styled to easily fit into Lightning Design System based solutions, but also have standard bootstrap versions to easily fit into custom designs."
+                                             containerClass="slds-text-body_regular"
+                                             showImage="true"
+                                             imgSrc="{!$Resource.FAST_Images + '/FAST-image.jpg'}"
+                                             imgClass="homePage"
+                                             imgPosition="left"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout class="slds-p-top--medium">
+                <lightning:layoutItem class="">
+                    <c:FAST_ArticleComponent title="Adaptable"
+                                             content="Event driven architecture allows all the components to easily and transparently fit into any project. All elements emit events that are designed to be handled by your custom components. You can then use those values to meet your solutions."
+                                             containerClass="slds-text-body_regular"
+                                             showImage="true"
+                                             imgSrc="{!$Resource.FAST_Images + '/adatable.jpg'}"
+                                             imgClass="homePage"
+                                             imgPosition="left"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout class="slds-p-top--medium">
+                <lightning:layoutItem class="">
+                    <c:FAST_ArticleComponent title="Scalable"
+                                             content="Components are created dynamically and all are context aware. This means that all components can be used in projects of any size using a limited number of flexible and adaptable base components."
+                                             containerClass="slds-text-body_regular"
+                                             showImage="true"
+                                             imgSrc="{!$Resource.FAST_Images + '/scalable-image.jpg'}"
+                                             imgClass="homePage"
+                                             imgPosition="left"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+            <lightning:layout class="slds-p-top--medium">
+                <lightning:layoutItem class="">
+                    <c:FAST_ArticleComponent title="Transferable"
+                                             content="The framework is available in the Appirio asset library and uses standard aura components. That can be easily uploaded to any Lightning enabled Salesforce instance using standard metadata transfer."
+                                             containerClass="slds-text-body_regular"
+                                             showImage="true"
+                                             imgSrc="{!$Resource.FAST_Images + '/transferable-image.jpg'}"
+                                             imgClass="homePage"
+                                             imgPosition="left"
+                    />
+                </lightning:layoutItem>
+            </lightning:layout>
+
+        </lightning:layoutItem>
+        <!-- / Page content -->
+    </lightning:layout>
+</aura:component>

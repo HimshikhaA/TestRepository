@@ -1,0 +1,9 @@
+<apex:page controller="TestCustomLookupCtrl">
+<apex:form >
+<apex:outputLabel > Account </apex:outputLabel>
+<apex:outputPanel id="companies_discussed">                               
+<apex:inputHidden value="{!companyDiscussed}" id="companyDiscussedId"/> 
+<c:CustomLookup objectName="Account" fieldAPI="Name" fieldToPopulateId="{!$Component.companyDiscussedId}" fieldSetName="account_search_result"/>
+</apex:outputPanel>
+</apex:form>
+</apex:page>

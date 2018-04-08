@@ -1,0 +1,19 @@
+/**
+ * Created by cedrickithima on 10/01/2018.
+ */
+.THIS span.tabStatusIcon {
+    height: 22px;
+    width: 22px;
+    padding: 0 4px;
+}
+
+.THIS span.tabTitle {
+    margin-right: 5px;
+}
+
+.THIS .slds-vertical-tabs__nav-item.slds-is-active {
+    margin-right: -1px;
+    border-right: 0;
+    background: rgb(255, 255, 255);
+    color: rgb(21, 137, 238);
+}

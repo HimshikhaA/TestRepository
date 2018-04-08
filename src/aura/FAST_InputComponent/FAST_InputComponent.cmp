@@ -1,0 +1,30 @@
+<!--
+ - Created by Cedric Solvo on 19/09/2017.
+ @Description: A component for page inputs
+ -->
+
+<aura:component description="FAST_InputComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="inputName" type="String" default=""/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="inputLabel" type="String" default="Standard Input"/>
+    <aura:attribute name="inputClass" type="String" default=""/>
+    <aura:attribute name="inputType" type="String" default="text"/>
+    <aura:attribute name="inputValue" type="String" default=""/>
+    <aura:attribute name="initialValue" type="String" default=""/>
+    <aura:attribute name="placeholder" type="String" default=""/>
+    <aura:attribute name="inputDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="inputRequired" type="Boolean" default="false"/>
+    <aura:attribute name="maxChars" type="Integer" default=""/>
+
+    <!-- Events -->
+    <aura:registerEvent name="fastInputEvent" type="c:FAST_InputEvent"/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.inputValue}" action="{!c.handleInputEvent}" />
+
+    <lightning:input type="{!v.inputType}" label="{!v.inputLabel}" name="{!v.inputName}" value="{!v.inputValue}" disabled="{!v.inputDisabled}" placeholder="{!v.placeholder}" checked="{!v.inputValue}" required="{!v.inputRequired}" maxlength="{!v.maxChars}"/>
+
+</aura:component>

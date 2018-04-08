@@ -1,0 +1,81 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_PageHeader">
+
+    <!-- Attributes -->
+    <aura:attribute name="showIcon" type="Boolean" default="true"/>
+    <aura:attribute name="iconName" type="String" default="custom:custom9"/>
+    <aura:attribute name="iconSize" type="String" default="medium"/>
+    <aura:attribute name="pageTitle" type="String" default="{!$Label.c.FAST_LightningWelcomeTitle}"/>
+    <aura:attribute name="pageSubTitle" type="String" default="Fast, adaptable, scalable, transferable Lightning component development framework"/>
+
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+    <aura:attribute name="iconSizeOptions" type="List" default="[
+    {'label': 'Extra Extra Small', 'value': 'xx-small'},
+    {'label': 'Extra small', 'value':'x-small'},
+    {'label': 'Small', 'value': 'small'},
+    {'label': 'Medium', 'value': 'medium'},
+    {'label': 'Large', 'value': 'large'}
+    ]"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_PageHeaderComponent pageTitle="{!v.pageTitle}"
+                    pageSubTitle="{!v.pageSubTitle}"
+                    showIcon="{!v.showIcon}"
+                    iconName="{!v.iconName}"
+                    iconSize="{!viconSize}"
+            />
+        </lightning:layoutItem>
+    </lightning:layout>
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageTitle"
+                                        inputLabel="pageTitle"
+                                        inputValue="{!v.pageTitle}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.pageSubTitle"
+                                        inputLabel="pageSubTitle"
+                                        inputValue="{!v.pageSubTitle}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.showIcon"
+                                        inputLabel="showIcon"
+                                        inputValue="{!v.showIcon}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.iconName"
+                                        inputLabel="iconName"
+                                        inputValue="{!v.iconName}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout multipleRows="true" >
+            <lightning:layoutItem padding="around-small" size="6">
+
+                <c:FAST_SelectComponent selectName="v.iconSize"
+                        selectLabel="iconSize"
+                        options="{!v.iconSizeOptions}"
+                        selectValue="{!v.iconSize}"
+                />
+
+            </lightning:layoutItem>
+
+        </lightning:layout>
+    </div>
+</aura:component>

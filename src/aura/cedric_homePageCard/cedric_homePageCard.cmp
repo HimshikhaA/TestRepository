@@ -1,0 +1,56 @@
+<!--
+ - Created by cedrickithima on 24/11/2017.
+ -->
+
+<aura:component description="cedric_homePageCard">
+
+
+    <!-- Attributes -->
+    <aura:attribute name="showIcon" type="Boolean" default="false"/>
+    <aura:attribute name="iconName" type="String" default="custom:custom9"/>
+    <aura:attribute name="iconSize" type="String" default="large"/>
+    <aura:attribute name="cardTitle" type="String" default=""/>
+    <aura:attribute name="cardClass" type="String" default="slds-card"/>
+    <aura:attribute name="cardText" type="String" default=""/>
+    <aura:attribute name="textContainerClass" type="String" default=""/>
+    <aura:attribute name="articleTitle" type="String" default=""/>
+    <aura:attribute name="articleContent" type="String" default=""/>
+    <aura:attribute name="articleContainerClass" type="String" default=""/>
+    <aura:attribute name="articleShowImage" type="Boolean" default="true"/>
+    <aura:attribute name="articleImgSrc" type="String" default=""/>
+    <aura:attribute name="articleImgClass" type="String" default=""/>
+    <aura:attribute name="articleImgPosition" type="String" default="top"/>
+    <aura:attribute name="contentType" type="String" default="text"/>
+    <aura:attribute name="dynamicContent" type="String" default=""/>
+    <aura:attribute name="dynamicContentParameters" type="String" default=""/>
+
+    <article class="{!v.cardClass}">
+        <div class="slds-card__header slds-grid">
+            <aura:if isTrue="{!v.showIcon}">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-standard-contact" title="{!v.cardTitle}">
+                        <lightning:icon iconName="{!v.iconName}" size="{!v.iconSize}" alternativeText="{!v.cardTitle}"/>
+                    </span>
+                </div>
+            </aura:if>
+            <div class="slds-media__body">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2>
+                            <span class="slds-text-heading_small"> {!v.cardTitle}</span>
+                        </h2>
+                    </div>
+                </header>
+            </div>
+        </div>
+        <div class="slds-card__body slds-card__body_inner">
+
+
+            <c:FAST_TextComponent containerClass="{!v.textContainerClass}"
+                                  textContent="{!v.cardText}"
+            />
+
+
+        </div>
+    </article>
+</aura:component>

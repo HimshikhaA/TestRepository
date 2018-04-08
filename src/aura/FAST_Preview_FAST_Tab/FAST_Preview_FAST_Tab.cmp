@@ -1,0 +1,59 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Tab">
+
+    <!-- Attributes -->
+    <aura:attribute name="parametersSrc" type="String" default="/FASTDefaultJSON/tabs-preview.json"/>
+    <aura:attribute name="tabContainerClass" type="String" default="slds-tabs_default"/>
+    <aura:attribute name="tabListClass" type="String" default="slds-tabs_default__nav"/>
+
+    <aura:attribute name="formParamOptions" type="List" default="[
+    {'label': 'Tab Preview 1', 'value': '/FASTDefaultJSON/tabs-preview.json'},
+    {'label': 'Tabs Preview 2', 'value': '/FASTDefaultJSON/tabs-preview-2.json'}
+    ]"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_TabsComponent parametersSrc="{!v.parametersSrc}"
+                    tabContainerClass="{!v.tabContainerClass}"
+                    tabListClass="{!v.tabListClass}"
+            />
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.parametersSrc"
+                                        selectLabel="parametersSrc"
+                                        options="{!v.formParamOptions}"
+                                        selectValue="{!v.parametersSrc}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.tabContainerClass"
+                                          inputLabel="tabContainerClass"
+                                          inputValue="{!v.tabContainerClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_TextAreaComponent inputName="v.tabListClass"
+                                          inputLabel="tabListClass"
+                                          inputValue="{!v.tabListClass}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+
+    </div>
+</aura:component>

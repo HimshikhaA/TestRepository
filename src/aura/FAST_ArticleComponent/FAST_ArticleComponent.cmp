@@ -1,0 +1,83 @@
+<!--
+ - Created by Cedric Solvo on 19/09/2017.
+ @Description: A component to hold article pages
+ -->
+
+<aura:component description="FAST_ArticleComponent">
+
+    <aura:attribute name="title" type="String" default="The quick brown fox jumps over the lazy dog."/>
+    <aura:attribute name="titleClass" type="String" default="slds-text-heading_large"/>
+    <aura:attribute name="content" type="String" default="This is an example of a HTML ready article that can be used across the site."/>
+    <aura:attribute name="containerClass" type="String" default=""/>
+    <aura:attribute name="imgPosition" type="String" default="top"/>
+    <aura:attribute name="imgSrc" type="String" default="/resource/1506133703000/FAST_Images/FAST-image.jpg"/>
+    <aura:attribute name="imgClass" type="String" default="homePage"/>
+    <aura:attribute name="showImage" type="Boolean" default="true"/>
+
+    <!-- Handlers -->
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+    <lightning:layout multipleRows="true" class="{!v.containerClass}">
+
+        <!-- top image -->
+
+        <aura:if isTrue="{!and(v.imgPosition == 'top', v.showImage)}">
+            <lightning:layoutItem padding="around-small" size="12">
+                <c:FAST_PictureComponent imgSrc="{!v.imgSrc}"
+                        imgClass="{!v.imgClass}"
+                />
+            </lightning:layoutItem>
+        </aura:if>
+
+        <!-- Middle Section -->
+        <lightning:layoutItem padding="around-small">
+
+            <lightning:layout >
+                <!-- left image -->
+                <aura:if isTrue="{!and(v.imgPosition == 'left', v.showImage)}">
+                    <lightning:layoutItem >
+                        <div class="slds-p-around--small">
+                            <c:FAST_PictureComponent imgSrc="{!v.imgSrc}"
+                                    imgClass="{!v.imgClass}"
+                            />
+                        </div>
+                    </lightning:layoutItem>
+                </aura:if>
+
+                <lightning:layoutItem >
+                    <!-- Article Output -->
+                    <div class="{!v.titleClass}">{!v.title}</div>
+                    <div class="slds-text-longform">
+                        <ui:outputRichText value="{!v.content}"/>
+                    </div>
+                </lightning:layoutItem>
+
+                <!-- right image -->
+                <aura:if isTrue="{!and(v.imgPosition == 'right', v.showImage)}">
+                    <lightning:layoutItem >
+                        <div class="slds-p-around--small">
+                            <c:FAST_PictureComponent imgSrc="{!v.imgSrc}"
+                                    imgClass="{!v.imgClass}"
+                            />
+                        </div>
+                    </lightning:layoutItem>
+                </aura:if>
+
+            </lightning:layout>
+
+
+        </lightning:layoutItem>
+
+
+
+        <!-- bottom image -->
+        <aura:if isTrue="{!and(v.imgPosition == 'bottom', v.showImage)}">
+            <lightning:layoutItem padding="around-small" size="12">
+                <c:FAST_PictureComponent imgSrc="{!v.imgSrc}"
+                        imgClass="{!v.imgClass}"
+                />
+            </lightning:layoutItem>
+        </aura:if>
+    </lightning:layout>
+
+</aura:component>

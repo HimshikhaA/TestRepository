@@ -1,0 +1,129 @@
+<!--
+ - Created by cedrickithima on 10/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Menu">
+
+    <!-- Attributes -->
+    <aura:attribute name="menuValues" type="String" default="/FASTDefaultJSON/ui-components-menu-json.json"/>
+    <aura:attribute name="menuValuesType" type="String" default="staticResource"/>
+    <aura:attribute name="menuItems" type="String[]" default=""/>
+    <aura:attribute name="containerClass" type="String" default="slds-context-bar"/>
+    <aura:attribute name="navClass" type="String" default="slds-context-bar__secondary"/>
+    <aura:attribute name="mainMenuClass" type="String" default="slds-grid"/>
+    <aura:attribute name="menuLocation" type="String" default="previewPage"/>
+    <aura:attribute name="currentSelectedItem" type="String" default=""/>
+    <aura:attribute name="previousSelectedItem" type="String" default="homePage"/>
+    <aura:attribute name="showIcons" type="Boolean" default="false"/>
+
+    <aura:attribute name="menuOptions" type="List" default="[
+    {'label': 'UI Components Menu', 'value': '/FASTDefaultJSON/ui-components-menu-json.json'},
+    {'label': 'Input Components Menu', 'value': '/FASTDefaultJSON/input-components-menu-json.json'},
+    {'label': 'Main Menu', 'value': '/FASTDefaultJSON/main-menu-json.json'}
+    ]"/>
+
+    <aura:attribute name="menuValuesOptions" type="List" default="[
+    {'label': 'Static Resource', 'value': 'staticResource'},
+    {'label': 'Apex code', 'value': 'apex'},
+    {'label': 'Inherited', 'value': 'inherited'}
+    ]"/>
+
+    <!-- Btn Attributes Configuration-->
+    <aura:attribute name="showBtnEvent" type="Boolean" default="false"/>
+    <aura:attribute name="menuNameClicked" type="String" default=""/>
+    <aura:attribute name="menuLocationClicked" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="menuItemClicked" event="c:FAST_ClickEvent" action="{!c.menuItemClicked}"/>
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_MenuComponent menuValues="{!v.menuValues}"
+                    menuValuesType="{!v.menuValuesType}"
+                    containerClass="{!v.containerClass}"
+                    navClass="{!v.navClass}"
+                    mainMenuClass="{!v.mainMenuClass}"
+                    menuLocation="{!v.menuLocation}"
+                    menuItems="{!v.menuItems}"
+                    showIcons="{!v.showIcons}"
+            />
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12">
+                <aura:if isTrue="{!v.showBtnEvent}">
+                    <ul>
+                        <li>Element: <strong>{!v.menuNameClicked}</strong></li>
+                        <li>Value: <strong>{!v.menuLocationClicked}</strong></li>
+                    </ul>
+                </aura:if>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.menuValues"
+                                        selectLabel="menuValues"
+                                        options="{!v.menuOptions}"
+                                        selectValue="{!v.menuValues}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.menuValuesType"
+                                        selectLabel="menuValuesType"
+                                        options="{!v.menuValuesOptions}"
+                                        selectValue="{!v.menuValuesType}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+
+        <lightning:layout >
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.containerClass"
+                                        inputLabel="containerClass"
+                                        inputValue="{!v.containerClass}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.navClass"
+                                        inputLabel="navClass"
+                                        inputValue="{!v.navClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.mainMenuClass"
+                                        inputLabel="mainMenuClass"
+                                        inputValue="{!v.mainMenuClass}"
+                />
+            </lightning:layoutItem>
+
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.menuLocation"
+                                        inputLabel="menuLocation"
+                                        inputValue="{!v.menuLocation}"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6" >
+                <c:FAST_InputComponent inputName="v.showIcons"
+                                        inputLabel="showIcons"
+                                        inputValue="{!v.showIcons}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+
+        </lightning:layout>
+    </div>
+
+</aura:component>

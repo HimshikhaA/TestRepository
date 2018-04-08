@@ -1,0 +1,110 @@
+<!--
+ - Created by cedrickithima on 10/10/2017.
+ -->
+
+<aura:component description="FAST_Preview_FAST_Article">
+
+    <!-- Attributes -->
+    <aura:attribute name="title" type="String" default="The quick brown fox jumps over the lazy dog."/>
+    <aura:attribute name="titleClass" type="String" default="slds-text-heading_large"/>
+    <aura:attribute name="content" type="String" default="This is an example of a HTML ready article that can be used across the site."/>
+    <aura:attribute name="containerClass" type="String" default=""/>
+    <aura:attribute name="imgPosition" type="String" default="top"/>
+    <aura:attribute name="imgSrc" type="String" default="/resource/1506133703000/FAST_Images/FAST-image.jpg"/>
+    <aura:attribute name="imgClass" type="String" default="homePage"/>
+    <aura:attribute name="showImage" type="Boolean" default="true"/>
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Top', 'value': 'top'},
+    {'label': 'Left', 'value': 'left'},
+    {'label': 'Right', 'value': 'right'},
+     {'label': 'Bottom', 'value': 'bottom'}
+    ]"/>
+    <!-- Handlers -->
+    <aura:handler name="fastBtnClicked" event="c:FAST_ClickEvent" action="{!c.handleBtnClick}"/>
+    <aura:handler name="fastInputEvent" event="c:FAST_InputEvent" action="{!c.handleInputEvent}"/>
+
+
+    <lightning:layout multipleRows="true">
+
+        <lightning:layoutItem padding="around-small" size="12" >
+            <c:FAST_ArticleComponent title="{!v.title}"
+                                     titleClass="{!v.titleClass}"
+                                     content="{!v.content}"
+                                     containerClass="{!v.containerClass}"
+                                     imgPosition="{!v.imgPosition}"
+                                     imgSrc="{!v.imgSrc}"
+                                     imgClass="{!v.imgClass}"
+                                     showImage="{!v.showImage}"
+            />
+        </lightning:layoutItem>
+
+    </lightning:layout>
+
+    <div class="preview-config-container">
+        <h1>{!$Label.c.FAST_PreviewParametersLabel}</h1>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12">
+                <lightning:layoutItem padding="around-small" size="12">
+                    <h4>Image Src options</h4>
+                    <ul>
+                        <li>{!$Resource.FAST_Images + '/FAST-image.jpg'}</li>
+                        <li>{!$Resource.FAST_Images + '/adatable.jpg'}</li>
+                        <li>{!$Resource.FAST_Images + '/scalable-image.jpg'}</li>
+                        <li>{!$Resource.FAST_Images + '/transferable-image.jpg'}</li>
+                    </ul>
+                </lightning:layoutItem>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.title"
+                                        inputLabel="title"
+                                        inputValue="{!v.title}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.titleClass"
+                                        inputLabel="titleClass"
+                                        inputValue="{!v.titleClass}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="12">
+                <c:FAST_RichTextComponent inputName="v.content"
+                                           placeholder="{!v.placeholder}"
+                                           inputValue="{!v.content}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6" >
+                <c:FAST_InputComponent inputName="v.containerClass"
+                                        inputLabel="containerClass"
+                                        inputValue="{!v.containerClass}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" >
+                <c:FAST_InputComponent inputName="v.showImage"
+                                        inputLabel="showImage"
+                                        inputValue="{!v.showImage}"
+                                        inputType="checkbox"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+
+        <lightning:layout >
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_InputComponent inputName="v.imgSrc"
+                                        inputLabel="imgSrc"
+                                        inputValue="{!v.imgSrc}"
+                />
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="6">
+                <c:FAST_SelectComponent selectName="v.imgPosition"
+                        selectLabel="imgPosition"
+                        options="{!v.options}"
+                        selectValue="{!v.imgPosition}"
+                />
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

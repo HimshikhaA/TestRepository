@@ -1,0 +1,30 @@
+<!--
+ - Created by cedrickithima on 30/10/2017.
+ -->
+
+<aura:component description="FAST_RichTextComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="inputName" type="String" default=""/>
+    <aura:attribute name="inputClass" type="String" default=""/>
+    <aura:attribute name="inputLabel" type="String" default=""/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="inputLabelClass" type="String" default="slds-form-element__label"/>
+    <aura:attribute name="inputType" type="String" default="text"/>
+    <aura:attribute name="inputValue" type="String" default=""/>
+    <aura:attribute name="initialValue" type="String" default=""/>
+    <aura:attribute name="inputMaxLength" type="Integer" default=""/>
+
+    <aura:attribute name="placeholder" type="String" default=""/>
+    <aura:attribute name="inputDisabled" type="Boolean" default="false"/>
+
+    <!-- Events -->
+    <aura:registerEvent name="fastInputEvent" type="c:FAST_InputEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.inputValue}" action="{!c.handleInputEvent}" />
+
+
+    <label class="{!v.inputLabelClass}">{!v.inputLabel}</label>
+    <lightning:inputRichText class="{!v.inputClass}" value="{!v.inputValue}" disabled="{!v.inputDisabled}" placeholder="{!v.placeholder}" />
+
+</aura:component>

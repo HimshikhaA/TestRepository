@@ -1,0 +1,55 @@
+<!--
+ - Created by cedricsolvo on 28/09/2017.
+ -->
+
+<aura:component description="temp_formsPage">
+
+    <!-- Attributes -->
+    <aura:attribute name="pageView" type="String" default="singleFormPage"/>
+    <aura:attribute name="menuSelectedItem" type="String" default="singleFormPage"/>
+    <aura:attribute name="submenuSelectedItem" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="menuItemClicked" event="c:FAST_ClickEvent" action="{!c.menuItemClicked}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <!-- Page Sub header-->
+        <lightning:layoutItem size="12">
+            <c:FAST_PageHeaderComponent iconName="utility:edit_form"
+                    pageTitle="{!$Label.c.forms_CardTitle}"
+                    pageSubTitle="{!$Label.c.forms_Cardtag}"
+            />
+        </lightning:layoutItem>
+        <!-- / sub header -->
+
+        <!-- Horizontal Nav -->
+        <lightning:layoutItem size="12">
+            <c:FAST_MenuComponent menuValues="/FASTDefaultJSON/form-components-menu-json.json"
+                                  mainMenuClass="slds-grid"
+                                  menuLocation="formsPage"
+                                  containerClass="slds-context-bar"
+                                  navClass="slds-context-bar__secondary"
+            />
+        </lightning:layoutItem>
+        <!-- / Horizontal Nav  -->
+
+        <!-- Section cards -->
+        <lightning:layoutItem size="12" class="slds-p-top--medium slds-p-around--large">
+
+
+            <aura:if isTrue="{!v.pageView == 'singleFormPage'}">
+                <c:temp_FAST_FormPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'multipleStepFormPage'}">
+                <c:temp_FAST_MultiStepForm />
+            </aura:if>
+
+        </lightning:layoutItem>
+        <!-- / Section cards -->
+
+
+    </lightning:layout>
+
+</aura:component>

@@ -1,0 +1,13 @@
+<!--
+ - Created by cedrickithima on 12/10/2017.
+ -->
+
+<aura:component description="FAST_TextComponent">
+
+    <aura:attribute name="containerClass" type="String" default=""/>
+    <aura:attribute name="textContent" type="String" default=""/>
+
+    <div class="{!v.containerClass}">
+        <ui:outputText value="{!v.textContent}"/>
+    </div>
+</aura:component>

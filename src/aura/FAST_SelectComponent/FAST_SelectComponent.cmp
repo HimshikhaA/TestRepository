@@ -1,0 +1,37 @@
+<!--
+ - Created by Cedric Solvo on 19/09/2017.
+ @Description: A component to display a select string
+ -->
+
+<aura:component description="FAST_SelectComponent">
+
+    <!-- Attributes -->
+    <aura:attribute name="selectName" type="String" default=""/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="selectPlaceholder" type="String" default="Select an option"/>
+    <aura:attribute name="selectLabel" type="String" default=""/>
+    <aura:attribute name="selectClass" type="String" default=""/>
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'apples', 'value': 'option1'},
+    {'label': 'oranges', 'value': 'option2'},
+     {'label': 'pineapples', 'value': 'option3'}
+    ]"/>
+    <aura:attribute name="selectValue" type="String" default=""/>
+    <aura:attribute name="selectDisabled" type="Boolean" default="false"/>
+    <aura:attribute name="selectRequired" type="Boolean" default="false"/>
+
+    <aura:attribute name="initialValue" type="String" default=""/>
+
+    <!-- Events -->
+    <aura:registerEvent name="fastInputEvent" type="c:FAST_InputEvent"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.selectValue}" action="{!c.handleInputEvent}"/>
+
+    <lightning:select name="{!v.selectName}" label="{!v.selectLabel}" value="{!v.selectValue}" disabled="{!v.selectDisabled}" required="{!v.selectRequired}" >
+        <option value=""> {!v.selectPlaceholder} </option>
+        <aura:iteration items="{!v.options}" var="option">
+            <option value="{!option.value}" text="{!option.label}"></option>
+        </aura:iteration>
+    </lightning:select>
+
+</aura:component>

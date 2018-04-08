@@ -1,0 +1,23 @@
+<!--
+ - Created by cedrickithima on 04/10/2017.
+ -->
+
+<aura:component description="temp_FAST_ArticlePage">
+
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_PageTitleComponent pageTitle="{!$Label.c.article_title}"
+                    pageSubTitle="{!$Label.c.article_tag}"
+            />
+        </lightning:layoutItem>
+
+        <lightning:layoutItem padding="around-small" size="12">
+            <c:FAST_CardComponent cardTitle="{!$Label.c.FAST_PreviewConfigurationLabel}"
+                    contentType="dynamicContent"
+                    dynamicContent="c:FAST_Preview_FAST_Article"
+            />
+
+        </lightning:layoutItem>
+
+    </lightning:layout>
+</aura:component>

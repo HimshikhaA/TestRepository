@@ -1,0 +1,71 @@
+<!--
+ - Created by cedricsolvo on 28/09/2017.
+ -->
+
+<aura:component description="temp_InputPage">
+
+    <!-- Attributes -->
+    <aura:attribute name="pageView" type="String" default="inputsPage"/>
+    <aura:attribute name="menuSelectedItem" type="String" default="inputsPage"/>
+    <aura:attribute name="submenuSelectedItem" type="String" default=""/>
+
+    <!-- Handlers -->
+    <aura:handler name="menuItemClicked" event="c:FAST_ClickEvent" action="{!c.menuItemClicked}"/>
+
+    <lightning:layout multipleRows="true">
+
+        <!-- Page Sub header-->
+        <lightning:layoutItem size="12">
+            <c:FAST_PageHeaderComponent iconName="utility:edit"
+                    pageTitle="Inputs"
+                    pageSubTitle="Lightning design system, aura, and HTML5 inputs."
+            />
+        </lightning:layoutItem>
+        <!-- / sub header -->
+
+        <!-- Horizontal Nav -->
+        <lightning:layoutItem size="12">
+            <c:FAST_MenuComponent menuValues="/FASTDefaultJSON/input-components-menu-json.json"
+                    mainMenuClass="slds-grid"
+                    menuLocation="inputsPage"
+                    containerClass="slds-context-bar"
+                    navClass="slds-context-bar__secondary"
+            />
+        </lightning:layoutItem>
+        <!-- / Horizontal Nav  -->
+
+
+        <!-- Section cards -->
+        <lightning:layoutItem size="12" class="slds-p-top--medium slds-p-around--large">
+
+            <aura:if isTrue="{!v.pageView == 'inputsPage'}">
+                <c:temp_FAST_InputPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'textAreaPage'}">
+                <c:temp_FAST_TextAreaPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'richTextPage'}">
+                <c:temp_FAST_RichTextPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'selectPage'}">
+                <c:temp_FAST_SelectPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'radioGroupPage'}">
+                <c:temp_FAST_RadioPage />
+            </aura:if>
+
+            <aura:if isTrue="{!v.pageView == 'searchPage'}">
+                <c:temp_FAST_SearchInput />
+            </aura:if>
+
+        </lightning:layoutItem>
+        <!-- / Section cards -->
+
+
+    </lightning:layout>
+
+</aura:component>

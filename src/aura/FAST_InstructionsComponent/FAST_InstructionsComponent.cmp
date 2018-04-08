@@ -1,0 +1,18 @@
+<!--
+ - Created by cedrickithima on 15/01/2018.
+ -->
+
+<aura:component description="FAST_InstructionsComponent">
+    <!-- Attributes -->
+    <aura:attribute name="text" type="String" default=""/>
+    <aura:attribute name="customLabelID" type="String" default=""/>
+    <aura:attribute name="cssClass" type="String" default="slds-text-title"/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+    <div class="{!v.cssClass}">
+        <ui:outputRichText value="{!v.text}"/>
+    </div>
+
+</aura:component>

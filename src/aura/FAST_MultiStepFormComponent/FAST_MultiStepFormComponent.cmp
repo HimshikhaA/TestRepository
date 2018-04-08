@@ -1,0 +1,178 @@
+<!--
+ - Created by cedrickithima on 08/11/2017.
+ -->
+
+<aura:component description="FAST_MultiStepFormComponent">
+
+
+    <!-- Attributes -->
+    <aura:attribute name="formName" type="String" default="multiStepFormPreview"/>
+    <aura:attribute name="formTitle" type="String" default="Multi Step Form Preview"/>
+    <aura:attribute name="staticResource" type="String" default="FASTDefaultJSON"/>
+    <aura:attribute name="pathToFile" type="String" default="/FASTDefaultJSON/singleForm-Component-params.json"/>
+    <aura:attribute name="formParametersSrc" type="String" default="/tqDemoJSON/multi-step-form-preview.json"/>
+    <aura:attribute name="formParameters" type="String[]" default=""/>
+    <aura:attribute name="formClass" type="String" default="slds-form slds-form_stacked"/>
+    <aura:attribute name="formValues" type="Map" default=""/>
+    <aura:attribute name="formTitleClass" type="String" default="slds-text-heading_medium slds-hyphenate"/>
+    <aura:attribute name="headerClass" type="String" default="slds-modal__header"/>
+    <aura:attribute name="footerClass" type="String" default="slds-modal__footer"/>
+    <aura:attribute name="formInstructions" type="String" default="Please fill in the form below"/>
+    <aura:attribute name="formInstructionsClass" type="String" default=""/>
+    <aura:attribute name="showFormHeader" type="Boolean" default="true"/>
+    <aura:attribute name="showFormFooter" type="Boolean" default="true"/>
+
+    <!-- Tab Configuration -->
+    <aura:attribute name="activeTabId" type="String" default=""/>
+    <aura:attribute name="allTabs" type="String[]" default=""/>
+    <aura:attribute name="allOtherTabs" type="String[]" default=""/>
+
+    <aura:attribute name="tabContainerClass" type="String" default="slds-vertical-tabs"/>
+    <aura:attribute name="tabListClass" type="String" default="slds-vertical-tabs__nav"/>
+    <aura:attribute name="tabListItemClass" type="String" default="slds-vertical-tabs__nav-item"/>
+    <aura:attribute name="tabContentClass" type="String" default="slds-vertical-tabs__content slds-hide"/>
+
+    <!-- Btn Configuration -->
+    <!-- Cancel -->
+    <aura:attribute name="cancelBtnName" type="String" default="CancelBtn"/>
+    <aura:attribute name="cancelBtnLabel" type="String" default="Cancel"/>
+    <aura:attribute name="cancelBtnClass" type="String" default=""/>
+    <aura:attribute name="cancelBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="cancelBtnOnClickAction" type="String" default="CancelBtnClicked"/>
+    <aura:attribute name="cancelBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save And New -->
+    <aura:attribute name="saveAndNewBtnName" type="String" default="saveAndNewBtn"/>
+    <aura:attribute name="saveAndNewBtnLabel" type="String" default="Save &amp; New"/>
+    <aura:attribute name="saveAndNewBtnClass" type="String" default=""/>
+    <aura:attribute name="saveAndNewBtnVariant" type="String" default="neutral"/>
+    <aura:attribute name="saveAndNewBtnOnClickAction" type="String" default="saveAndNewBtnClicked"/>
+    <aura:attribute name="saveAndNewBtnDisabled" type="Boolean" default="false"/>
+
+    <!-- Save -->
+    <aura:attribute name="saveBtnName" type="String" default="saveBtnBtn"/>
+    <aura:attribute name="saveBtnLabel" type="String" default="Save"/>
+    <aura:attribute name="saveBtnClass" type="String" default=""/>
+    <aura:attribute name="saveBtnVariant" type="String" default="brand"/>
+    <aura:attribute name="saveBtnOnClickAction" type="String" default="saveBtnClicked"/>
+    <aura:attribute name="saveBtnDisabled" type="Boolean" default="false"/>
+
+
+    <aura:attribute name="showSaveButton" type="Boolean" default="true"/>
+    <aura:attribute name="showCancelBtn" type="Boolean" default="true"/>
+    <aura:attribute name="showSaveAndNewBtn" type="Boolean" default="true"/>
+    <aura:attribute name="showTabStatus" type="Boolean" default="true"/>
+
+    <!-- Events -->
+    <aura:registerEvent name="receivedFormValues" type="c:FAST_InputEvent"/>
+
+    <!-- Handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler name="change" value="{!v.formParametersSrc}" action="{!c.doInit}"/>
+
+    <div class="{!v.formClass}">
+        <aura:if isTrue="{!v.showFormHeader}">
+            <header class="{!v.headerClass}">
+                <h2 class="{!v.formTitleClass}">{!v.formTitle}</h2>
+            </header>
+        </aura:if>
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12">
+                <div class="slds-text-body_regular">{!v.formInstructions}</div>
+            </lightning:layoutItem>
+
+
+
+                <lightning:layoutItem padding="around-small" size="12">
+                    <lightning:layout multipleRows="true">
+
+                            <lightning:layoutItem class="" size="12">
+
+                                    <div class="{!v.tabContainerClass}">
+                                        <ul class="{!v.tabListClass}" role="tablist" aria-orientation="vertical">
+                                            <aura:iteration items="{!v.formParameters}" var="item">
+                                                <li aura:id="{!item.sectionView__c}" class="{!item.sectionNavBarClass__c}" title="{!item.sectionName}" role="presentation" onclick="{!c.handleTabClickEvent}"  id="{!item.sectionView__c}" >
+                                                    <a class="slds-vertical-tabs__link"  role="tab" tabindex="0" aria-selected="true" aria-controls="{!item.sectionView__c}">
+                                                                <span class="tabTitle">{!item.sectionName}</span>
+                                                                <aura:if isTrue="{!v.showTabStatus__c}">
+                                                                    <span class="slds-float--right">
+                                                                        <aura:if isTrue="{!item.sectionComplete__c}">
+                                                                            <lightning:icon size="xx-small" iconName="action:approval" class="tabStatusIcon"/>
+                                                                             <aura:set attribute="else">
+                                                                                <lightning:icon size="xx-small" iconName="action:close" class="tabStatusIcon"/>
+                                                                            </aura:set>
+                                                                        </aura:if>
+
+
+                                                                    </span>
+                                                                </aura:if>
+                                                    </a>
+                                                </li>
+                                            </aura:iteration>
+                                        </ul>
+                                        <aura:iteration items="{!v.formParameters}" var="item">
+                                            <div aura:id="{!item.sectionView + 'Tab'}" class="{!item.sectionTabClass}" id="{!item.sectionView + 'Tab'}" role="tabpanel" aria-labelledby="{!item.sectionView}">
+                                                <div class="slds-text-longform">
+                                                    <h3 class="slds-text-heading_medium">{!item.sectionName}</h3>
+                                                    <c:FAST_SingleFormComponent formName="{!item.formElement}"
+                                                                                formTitle="{!item.formLabel}"
+                                                                                staticResource="{!item.staticResource}"
+                                                                                pathToFile="{!item.pathToFile}"
+                                                                                formTitleClass="{!v.formTitleClass}"
+                                                                                formSection="{!item.formSection}"
+                                                                                showFormInstructions="false"
+                                                                                formInstructions="{!v.formInstructions}"
+                                                                                formInstructionsClass="{!v.formInstructionsClass}"
+                                                                                showFormHeader="false"
+                                                                                showFormFooter="false"
+                                                                                showSaveButton="false"
+                                                                                showCancelBtn="false"
+                                                                                showSaveAndNewBtn="false"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </aura:iteration>
+                                    </div>
+                            </lightning:layoutItem>
+
+
+                    </lightning:layout>
+
+                </lightning:layoutItem>
+
+
+        </lightning:layout>
+        <aura:if isTrue="{!v.showFormFooter}">
+            <footer class="{!v.footerClass}">
+                <aura:if isTrue="{!v.showCancelBtn}">
+                    <c:FAST_ButtonComponent btnName="{!v.cancelBtnName}"
+                                            btnLabel="{!v.cancelBtnLabel}"
+                                            btnTitle="{!v.cancelBtnLabel}"
+                                            btnVariant="{!v.cancelBtnVariant}"
+                                            btnOnclickAction="{!v.cancelBtnOnClickAction}"
+                                            btnDisabled="{!v.cancelBtnDisabled}"
+                    />
+                </aura:if>
+                <aura:if isTrue="{!v.showSaveAndNewBtn}">
+                    <c:FAST_ButtonComponent btnName="{!v.saveAndNewBtnName}"
+                                            btnLabel="{!v.saveAndNewBtnLabel}"
+                                            btnTitle="{!v.saveAndNewBtnLabel}"
+                                            btnVariant="{!v.saveAndNewBtnVariant}"
+                                            btnOnclickAction="{!v.saveAndNewBtnOnClickAction}"
+                                            btnDisabled="{!v.saveAndNewBtnDisabled}"
+                    />
+                </aura:if>
+                <aura:if isTrue="{!v.showSaveButton}">
+                    <c:FAST_ButtonComponent btnName="{!v.saveBtnName}"
+                                            btnLabel="{!v.saveBtnLabel}"
+                                            btnTitle="{!v.saveBtnLabel}"
+                                            btnVariant="{!v.saveBtnVariant}"
+                                            btnOnclickAction="{!v.saveBtnOnClickAction}"
+                                            btnDisabled="{!v.saveBtnDisabled}"
+                    />
+                </aura:if>
+            </footer>
+        </aura:if>
+    </div>
+
+</aura:component>
